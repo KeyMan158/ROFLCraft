@@ -1,14 +1,18 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "rofle",
+  "name": "ROFLCraft",
+  "description": "The RPG Mod",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": [
+    "Lorrtath",
+    "KeyMan158",
+    "Tyruss"
+  ],
+  "credits": "Lorrtah, KeyMan158 and Tyruss",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
