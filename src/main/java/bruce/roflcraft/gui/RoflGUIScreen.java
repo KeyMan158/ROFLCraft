@@ -1,5 +1,7 @@
 package bruce.roflcraft.gui;
 
+import bruce.roflcraft.settings.GUIIDs;
+
 //========================================
 //File Name: RoflGUIScreen.java
 //Author: Lorrtath
@@ -11,10 +13,12 @@ import net.minecraft.client.gui.GuiScreen;
 
 public class RoflGUIScreen extends GuiScreen
 {
-	//Test GUI buttons (should be private?)
+	//public static final int GUIID = GUIIDs.CharacterSheet.ordinal();
+	
+	//Test GUI buttons (should be private...)
 	public GuiButton a;
 	public GuiButton b;
-	
+		
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
