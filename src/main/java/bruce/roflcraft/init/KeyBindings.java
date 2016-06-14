@@ -20,15 +20,4 @@ public class KeyBindings
 		CharacterSheet = new KeyBinding("Open Character Sheet", Keyboard.KEY_C, "ROFLCraft");
 		ClientRegistry.registerKeyBinding(CharacterSheet);
 	}
-	
-	@SubscribeEvent
-	public void onKeyInout(InputEvent.KeyInputEvent event)
-	{
-		if(KeyBindings.CharacterSheet.isPressed())
-		{
-			//run the test GUI
-			System.out.println("Opening Character Sheet");
-			RoflGUIScreen screen = new RoflGUIScreen();
-		}
-	}
 }
