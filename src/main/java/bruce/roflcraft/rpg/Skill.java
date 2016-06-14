@@ -5,14 +5,10 @@ public class Skill
 	private String name;
 	private int value;
 	
-	public String getName()
+	public Skill(String sName, int sValue)
 	{
-		return name;
-	}
-	
-	public void setName(String skillName)
-	{
-		name = skillName;
+		name = sName;
+		value = sValue;
 	}
 	
 	public int getValue()

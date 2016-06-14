@@ -5,14 +5,10 @@ public class Attribute
 	private String name;
 	private int value;
 	
-	public String getName()
+	public Attribute(String aName, int aValue)
 	{
-		return name;
-	}
-	
-	public void setName(String attributeName)
-	{
-		name = attributeName;
+		name = aName;
+		value = aValue;
 	}
 	
 	public int getValue()
