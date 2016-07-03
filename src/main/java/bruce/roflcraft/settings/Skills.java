@@ -2,7 +2,8 @@ package bruce.roflcraft.settings;
 
 public enum Skills 
 {
-	NATURE,MINING,
+	NATURE,
+	MINING,
 	DIGGING,
 	MELEE,
 	BLOCKING,
