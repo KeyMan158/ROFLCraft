@@ -5,6 +5,8 @@ import org.lwjgl.input.Mouse;
 import bruce.roflcraft.gui.RoflGUIScreen;
 import bruce.roflcraft.init.KeyBindings;
 import bruce.roflcraft.main.RoflCraft;
+import bruce.roflcraft.rpg.character.IRPGCharacterData;
+import bruce.roflcraft.rpg.character.RPGCharacterProvider;
 import bruce.roflcraft.settings.GUIIDs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.main.Main;
@@ -21,7 +23,7 @@ public class KeyInputHandler
 		if(KeyBindings.CharacterSheet.isPressed())
 		{
 			//run the test GUI
-			//System.out.println("Opening Character Sheet");
+			System.out.println("Opening Character Sheet");
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 			player.openGui(RoflCraft.instance, GUIIDs.CharacterSheet.ordinal(), (World)player.getEntityWorld(), (int)player.posX, (int)player.posY, (int)player.posZ);
 		}

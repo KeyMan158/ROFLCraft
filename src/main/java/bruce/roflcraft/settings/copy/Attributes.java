@@ -1,6 +1,4 @@
-// TODO Redundant Class
-
-package bruce.roflcraft.settings;
+package bruce.roflcraft.settings.copy;
 
 public enum Attributes 
 {

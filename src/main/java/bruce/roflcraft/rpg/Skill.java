@@ -1,3 +1,5 @@
+// TODO Redundant Class
+
 package bruce.roflcraft.rpg;
 
 public class Skill 

@@ -1,25 +1,29 @@
 package bruce.roflcraft.gui;
 
 import bruce.roflcraft.main.Reference;
+import bruce.roflcraft.rpg.character.IRPGCharacterData;
+import bruce.roflcraft.rpg.character.RPGCharacterProvider;
 import bruce.roflcraft.settings.Skills;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlider;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import scala.reflect.internal.Trees.This;
 
 public class CharacterSheetGUI extends GuiScreen
-{
+{	
 	//Constants:
 	private final String TEXTURE_NAME = "CharacterSheet.png";
-	private final int BOOK_TOP = 1;
-	private final int BOOK_LEFT = 20;
-	private final int BOOK_WIDTH = 228;
-	private final int BOOK_HEIGHT = 180;
+	private final int BOOK_TOP = 6;
+	private final int BOOK_LEFT = 23;
+	private final int BOOK_WIDTH = 226;
+	private final int BOOK_HEIGHT = 172;
 	private final int SKILL_FRAME_TOP = 223;
 	private final int SKILL_FRAME_LEFT = 3;
 	private final int SKILL_FRAME_HEIGHT = 22;
@@ -38,13 +42,22 @@ public class CharacterSheetGUI extends GuiScreen
 	public GuiSlider[] slillBars;
 	public GuiButton[] skillButtons;
 	
+	private SkillUpButton messageTest;
+	
+	private TestAnimation testAnimation;
+	
+	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
-		//Draw GUI content to the screen 
-		this.drawDefaultBackground();//Set the background to the default value
+		testAnimation.onRenderTick();
+		//m_player.getCapability(RPGCharacterProvider.CHAR_CAP, null).
+		this.mc.getTextureManager().bindTexture(testAnimation.getResourceLocation());
+		this.drawTexturedModalRect(0, 0, testAnimation.getLeft() ,testAnimation.getTop(), testAnimation.getWidth(), testAnimation.getHeight());
+		
+		//Draw GUI content to the screen (called every tick)
+		//this.drawDefaultBackground();//Set the background to the default value
 		this.mc.getTextureManager().bindTexture(new ResourceLocation(Reference.MODID + ":textures/gui/" + TEXTURE_NAME));
 		this.drawTexturedModalRect(this.width/2 - BOOK_WIDTH/2, this.height/2 - BOOK_HEIGHT/2, BOOK_LEFT, BOOK_TOP, BOOK_WIDTH, BOOK_HEIGHT);
-		super.drawScreen(mouseX, mouseY, partialTicks);
 		
 		//Draw other content from the texture
 		for (int i = 0; i < 5; i++) 
@@ -57,7 +70,16 @@ public class CharacterSheetGUI extends GuiScreen
 					SKILL_FRAME_WIDTH,
 					SKILL_FRAME_HEIGHT);
 		}
-		//Draw features with the front renderer
+		
+		//Testing the Book mark Render
+		this.drawTexturedModalRect(this.width/2 - BOOK_WIDTH/2 + 22,
+				this.height/2 - BOOK_HEIGHT/2 - 13,
+				120,
+				194,
+				20,
+				20);
+		
+		//Draw features with the font renderer
 		for (int i = 0; i < 5; i++) 
 		{
 			this.mc.fontRendererObj.drawString("Skill " + i, 
@@ -69,6 +91,16 @@ public class CharacterSheetGUI extends GuiScreen
 					this.height/2 - BOOK_HEIGHT/2 + SKILLS_TOP + (i * SKILL_FRAME_HEIGHT) + 3,
 					0);
 		}
+		IRPGCharacterData charData = Minecraft.getMinecraft().thePlayer.getCapability(RPGCharacterProvider.CHAR_CAP, null);
+		this.mc.fontRendererObj.drawString(charData.getSkillPointTracker().getStoredXP() + " / " + charData.getSkillPointTracker().xpToNext(),0, 0, 0);	
+		this.mc.fontRendererObj.drawString("Level : " + charData.getSkillPointTracker().getLevel(),0, 12, 0);	
+		super.drawScreen(mouseX, mouseY, partialTicks);
+	}
+	
+	@Override
+	public void updateScreen()
+	{
+		
 	}
 	
 	@Override
@@ -80,8 +112,10 @@ public class CharacterSheetGUI extends GuiScreen
 	@Override
 	public void initGui()
 	{
+		testAnimation = new TestAnimation();
 		//set GUI features
+		messageTest = new SkillUpButton(0, this.width/2, this.height / 2, 20, 20, "+");
+		messageTest.init(Minecraft.getMinecraft().thePlayer);
+		this.buttonList.add(messageTest);
 	}
-	
-	
 }
