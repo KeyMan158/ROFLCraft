@@ -1,6 +1,6 @@
 package bruce.roflcraft.gui.character;
 
-import bruce.roflcraft.gui.IGUIComponent;
+import bruce.roflcraft.gui.GUIComponent.IGUIComponent;
 import bruce.roflcraft.main.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -37,12 +37,6 @@ public class LevelFrame extends Gui implements IGUIComponent, IXPVisual
 	}
 
 	@Override
-	public void init() 
-	{
-
-	}
-
-	@Override
 	public void drawComponent(Minecraft mc, int mouseX, int mouseY) 
 	{
 		mc.getTextureManager().bindTexture(RESOURCE);
@@ -50,13 +44,13 @@ public class LevelFrame extends Gui implements IGUIComponent, IXPVisual
 	}
 
 	@Override
-	public int getTop() 
+	public int getActualTop() 
 	{
 		return m_top;
 	}
 
 	@Override
-	public int getLeft() 
+	public int getActualLeft() 
 	{
 		return m_left;
 	}
@@ -89,5 +83,35 @@ public class LevelFrame extends Gui implements IGUIComponent, IXPVisual
 	public void SetXPBar(float xp) 
 	{
 		m_xpWidth = (int)(XP_WIDTH_FULL * xp);
+	}
+
+	@Override
+	public void init(int parentLeft, int parentTop) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTop() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setTop(int top) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getLeft() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setLeft(int left) {
+		// TODO Auto-generated method stub
+		
 	}
 }

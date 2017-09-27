@@ -1,4 +1,4 @@
-package bruce.roflcraft.gui;
+package bruce.roflcraft.gui.GUIComponent;
 
 import net.minecraft.client.Minecraft;
 
@@ -12,7 +12,7 @@ public interface IGUIComponent
 	/**
 	 * Initialise the component
 	 */
-	public void init();
+	public void init(int parentLeft, int parentTop);
 	
 	/**
 	 * Draws the component	
@@ -23,13 +23,33 @@ public interface IGUIComponent
 	 * Gets the top value
 	 * @return The top of the component
 	 */
+	public int getActualTop();
+	
+	/**
+	 * Gets the top in relation to its parent
+	 * @return The top value in relation to the parent
+	 */
 	public int getTop();
+	
+	/**
+	 * Sets the top variable (in relation to the parent container)
+	 * @param top
+	 */
+	public void setTop(int top);
 	
 	/**
 	 * Gets the left value
 	 * @return The left of the component
 	 */
+	public int getActualLeft();
+	
 	public int getLeft();
+	
+	/**
+	 * Sets the left variable (in relation to the parent container)
+	 * @param left
+	 */
+	public void setLeft(int left);
 	
 	/**
 	 * Gets the width value

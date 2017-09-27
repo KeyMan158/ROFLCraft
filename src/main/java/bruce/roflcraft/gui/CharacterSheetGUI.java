@@ -1,9 +1,13 @@
 package bruce.roflcraft.gui;
 
+import bruce.roflcraft.gui.GUIComponent.GUIComponentManager;
+import bruce.roflcraft.gui.GUIComponent.Button.ArrowButton;
+import bruce.roflcraft.gui.GUIComponent.Button.ArrowButtonDirection;
 import bruce.roflcraft.main.Reference;
 import bruce.roflcraft.rpg.character.IRPGCharacterData;
 import bruce.roflcraft.rpg.character.RPGCharacterProvider;
 import bruce.roflcraft.settings.Skills;
+import gnu.trove.impl.hash.THashIterator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -42,17 +46,18 @@ public class CharacterSheetGUI extends GuiScreen
 	public GuiSlider[] slillBars;
 	public GuiButton[] skillButtons;
 	
-	private SkillUpButton messageTest;
-	
 	private TestAnimation testAnimation;
+	private GUIComponentManager testManager;
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
 		testAnimation.onRenderTick();
 		//m_player.getCapability(RPGCharacterProvider.CHAR_CAP, null).
-		this.mc.getTextureManager().bindTexture(testAnimation.getResourceLocation());
-		this.drawTexturedModalRect(0, 0, testAnimation.getLeft() ,testAnimation.getTop(), testAnimation.getWidth(), testAnimation.getHeight());
+		//this.mc.getTextureManager().bindTexture(testAnimation.getResourceLocation());
+		//this.drawTexturedModalRect(0, 0, testAnimation.getLeft() ,testAnimation.getTop(), testAnimation.getWidth(), testAnimation.getHeight());
+		
+		testManager.drawComponent(this.mc, mouseX, mouseY);
 		
 		//Draw GUI content to the screen (called every tick)
 		//this.drawDefaultBackground();//Set the background to the default value
@@ -112,10 +117,14 @@ public class CharacterSheetGUI extends GuiScreen
 	@Override
 	public void initGui()
 	{
+		testManager = new GUIComponentManager();
+		ArrowButton button = new ArrowButton();
+		testManager.register(button);
+		testManager.init(0 , 32);
 		testAnimation = new TestAnimation();
 		//set GUI features
-		messageTest = new SkillUpButton(0, this.width/2, this.height / 2, 20, 20, "+");
-		messageTest.init(Minecraft.getMinecraft().thePlayer);
-		this.buttonList.add(messageTest);
+		//messageTest = new SkillUpButton(0, this.width/2, this.height / 2, 20, 20, "+");
+		//messageTest.init(Minecraft.getMinecraft().thePlayer);
+		//this.buttonList.add(messageTest);
 	}
 }
