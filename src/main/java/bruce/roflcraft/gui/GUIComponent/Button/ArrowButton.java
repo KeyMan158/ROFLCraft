@@ -13,11 +13,6 @@ public class ArrowButton extends GUIButtonComponent
 	private static final int MAX_IMAGE_INDEX = 7;
 	private static final int MAX_PULSE_INDEX = 7;
 	private static final int MAX_TICK_INDEX = 4;
-	private boolean m_visability;
-	private int m_parentLeft;
-	private int m_left;
-	private int m_parentTop;
-	private int m_top;
 	private int m_imageIndex;
 	private int m_pulseIndex;
 	private int m_tickIndex;
@@ -27,49 +22,12 @@ public class ArrowButton extends GUIButtonComponent
 	public ArrowButton()
 	{
 		arrowDirection = ArrowButtonDirection.ARROW_BUTTON_UP;
-		m_visability = true;
 	}
 	
 	@Override
 	public void init(int parentLeft, int parentTop)
 	{
 		super.init(parentLeft, parentTop);
-		m_parentLeft = parentLeft;
-		m_parentTop = parentTop;
-	}
-	
-	@Override
-	public int getActualTop() 
-	{
-		return m_parentTop + m_top;
-	}
-	
-	@Override
-	public int getTop()
-	{
-		return m_top;
-	}
-
-	public void setTop(int top)
-	{
-		m_top = top;
-	}
-	
-	@Override
-	public int getActualLeft() 
-	{
-		return m_parentLeft + m_left;
-	}
-
-	@Override
-	public int getLeft()
-	{
-		return m_left;
-	}
-	
-	public void setLeft(int left)
-	{
-		m_left = left;
 	}
 	
 	@Override
@@ -82,18 +40,6 @@ public class ArrowButton extends GUIButtonComponent
 	public int getHeight() 
 	{
 		return BUTTON_HEIGHT;
-	}
-
-	@Override
-	public boolean getVisibility() 
-	{
-		return m_visability;
-	}
-
-	@Override
-	public void setVisibility(boolean visability) 
-	{
-		m_visability = visability;
 	}
 
 	@Override

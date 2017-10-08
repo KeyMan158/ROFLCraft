@@ -17,6 +17,12 @@ import net.minecraft.client.gui.Gui;
  */
 public abstract class GUIButtonComponent extends Gui implements IGUIComponent
 {
+	private int m_left;
+	private int m_parentLeft;
+	private int m_top;
+	private int m_parentTop;
+	private boolean m_visability = true;
+	
 	/**
 	 * was the mouse over the button last tick
 	 */
@@ -51,6 +57,8 @@ public abstract class GUIButtonComponent extends Gui implements IGUIComponent
 	public void init(int parentLeft, int parentTop)
 	{
 		m_listeners = new ArrayList<IGUIButtonComponentListener>();
+		m_parentLeft = parentLeft;
+		m_parentTop = parentTop;
 	}
 
 	@Override
@@ -76,16 +84,40 @@ public abstract class GUIButtonComponent extends Gui implements IGUIComponent
 	}
 
 	@Override
-	public abstract int getActualTop();
+	public int getActualTop()
+	{
+		return m_parentTop + m_top;
+	}
 
 	@Override
-	public abstract void setTop(int top);
+	public int getTop()
+	{
+		return m_top;
+	}
 	
 	@Override
-	public abstract int getActualLeft();
+	public void setTop(int top)
+	{
+		m_top = top;
+	}
+	
+	@Override
+	public int getActualLeft()
+	{
+		return m_parentLeft + m_left;
+	}
 
 	@Override
-	public abstract void setLeft(int left);
+	public int getLeft()
+	{
+		return m_left;
+	}
+	
+	@Override
+	public void setLeft(int left)
+	{
+		m_left = left;
+	}
 	
 	@Override
 	public abstract int getWidth();
@@ -94,10 +126,16 @@ public abstract class GUIButtonComponent extends Gui implements IGUIComponent
 	public abstract int getHeight();
 
 	@Override
-	public abstract boolean getVisibility();
+	public boolean getVisibility() 
+	{
+		return m_visability;
+	}
 
 	@Override
-	public abstract void setVisibility(boolean visability);
+	public void setVisibility(boolean visability) 
+	{
+		m_visability = visability;
+	}
 
 	/**
 	 * Registers a Button component listener

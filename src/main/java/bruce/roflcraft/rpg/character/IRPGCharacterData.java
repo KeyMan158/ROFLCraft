@@ -1,7 +1,9 @@
 package bruce.roflcraft.rpg.character;
 
+import bruce.roflcraft.rpg.character.Listeners.ISkillStatListener;
 import bruce.roflcraft.rpg.character.stats.AttributeCollection;
 import bruce.roflcraft.rpg.character.stats.SkillCollection;
+import bruce.roflcraft.rpg.character.stats.SkillIndex;
 import bruce.roflcraft.rpg.character.stats.SkillPointTracker;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,7 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
  * RPG Character data capability interface
  * @author Lorrtath
  */
-public interface IRPGCharacterData 
+public interface IRPGCharacterData extends ISkillStatListener
 {
 	/**
 	 * Gets a collection of the players attributes
@@ -41,6 +43,13 @@ public interface IRPGCharacterData
 	 * @param xp
 	 */
 	public void PurchaseSkillPoint(int xp);
+	
+	/**
+	 * spends an amount of skill points on a skill
+	 * @param ammout The amount of skill points to spend
+	 * @param index The skill index that this applies to
+	 */
+	public void spendSkillPoint(int ammout, SkillIndex index);
 	
 	/**
 	 * Adds an amount of player XP towards the next available skill point. This is 

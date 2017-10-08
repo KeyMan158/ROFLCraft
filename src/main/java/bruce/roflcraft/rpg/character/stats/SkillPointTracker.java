@@ -53,6 +53,18 @@ public class SkillPointTracker
 	}
 	
 	/**
+	 * Subtracts an amount from the amount of points to the available points
+	 * @param ammount The amount to subtract
+	 */
+	public void removePointToSpend(int ammount)
+	{
+		if(ammount > 0)
+		{
+			m_skillPointsAvailable -= ammount;
+		}
+	}
+	
+	/**
 	 * Counts an amount of player XP towards skill points
 	 * @param xpAmmount
 	 * @return Levels gained

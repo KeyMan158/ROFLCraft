@@ -3,6 +3,7 @@ package bruce.roflcraft.rpg.character.stats;
 import java.util.ArrayList;
 import java.util.List;
 
+import bruce.roflcraft.rpg.character.Listeners.ISkillStatListener;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -10,6 +11,7 @@ import net.minecraft.nbt.NBTTagList;
 public class SkillCollection implements IRPGStatCollection
 {
 	private List<Skill> m_skills;
+	private ISkillStatListener m_statListenet;
 	// This bit is a mess ...
 	private static String[] NAMES = 
 		{
@@ -17,8 +19,8 @@ public class SkillCollection implements IRPGStatCollection
 			"Mining",
 			"Digging",
 			"Construction",
-			"Mele Damage",
-			"Mele Speed",
+			"Meele Damage",
+			"Meele Speed",
 			"Blocking",
 			"Archery",
 			"Carpentry",
@@ -86,6 +88,11 @@ public class SkillCollection implements IRPGStatCollection
 		}
 	}
 	
+	public void setListener(ISkillStatListener listener)
+	{
+		m_statListenet = listener;
+	}
+	
 	/**
 	 * Adds a skill to the collection
 	 * @param skill The skill to add
@@ -150,6 +157,15 @@ public class SkillCollection implements IRPGStatCollection
 		}
 	}
 
+	public void addToStat(int amount, SkillIndex index)
+	{
+		if(index.ordinal() >= 0 && index.ordinal() < m_skills.size())
+		{
+			m_skills.get(index.ordinal()).addToValue(amount);
+			m_statListenet.OnSkillValueChanged(m_skills.get(index.ordinal()), amount);
+		}
+	}
+	
 	/**
 	 * Gets the index of the skill
 	 * @param Name The name of the skill

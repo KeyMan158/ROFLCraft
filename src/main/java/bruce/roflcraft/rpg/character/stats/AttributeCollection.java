@@ -59,6 +59,20 @@ public class AttributeCollection implements IRPGStatCollection
 		}
 	}
 
+	/**
+	 * Progresses an attribute by am amount
+	 * @param index The attribute to progress
+	 */
+	public void progressAttribute(AttributeIndex index)
+	{
+		m_attributes[index.ordinal()].addToProgression();
+	}
+	
+	public int getAttributeProgress(AttributeIndex index)
+	{
+		return m_attributes[index.ordinal()].getProgression();
+	}
+	
 	@Override
 	public int getStatValue(int index) 
 	{
@@ -79,7 +93,7 @@ public class AttributeCollection implements IRPGStatCollection
 	{
 		return NAMES[index];
 	}
-
+	
 	@Override
 	public int getStatIndex(String Name) 
 	{

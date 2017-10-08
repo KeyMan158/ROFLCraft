@@ -14,7 +14,7 @@ public class Attribute extends RPGStat
 	
 	private AttributeType m_attributeType;
 	private int m_progressToNext;
-	private final int PROGRESS_MAX = 2; // Temporary place holder
+	private final int PROGRESS_MAX = 3; // Temporary place holder
 	
 	public Attribute(String name, int value, AttributeType type) 
 	{

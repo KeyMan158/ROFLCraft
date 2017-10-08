@@ -5,10 +5,12 @@ import bruce.roflcraft.main.Reference;
 import bruce.roflcraft.network.Message.RPGCharacterSyncMessage;
 import bruce.roflcraft.network.Message.RequestRPGCharacterSyncMessage;
 import bruce.roflcraft.network.Message.SkillPointPurchaseMessage;
+import bruce.roflcraft.network.Message.SkillPointSpentMessage;
 import bruce.roflcraft.network.MessageHandler.RPGCharacterSyncMessageHandler;
 import bruce.roflcraft.network.MessageHandler.RequestRPGCharacterSyncMessageHandler;
 import bruce.roflcraft.network.MessageHandler.SkillPointPurchaseMessageHandler;
 import bruce.roflcraft.network.MessageHandler.SkillPointReciptMessasgeHandler;
+import bruce.roflcraft.network.MessageHandler.SkillPointSpentMessageHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -36,6 +38,7 @@ public class RoflCraftPacketHandler
 		registerMessage(SkillPointReciptMessasgeHandler.class, SkillPointPurchaseMessage.class, Side.CLIENT);
 		registerMessage(RPGCharacterSyncMessageHandler.class, RPGCharacterSyncMessage.class, Side.CLIENT);
 		registerMessage(RequestRPGCharacterSyncMessageHandler.class, RequestRPGCharacterSyncMessage.class , Side.SERVER);
+		registerMessage(SkillPointSpentMessageHandler.class, SkillPointSpentMessage.class, Side.SERVER);
 	}
 	
 	/**

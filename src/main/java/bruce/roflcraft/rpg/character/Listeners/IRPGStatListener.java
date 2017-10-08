@@ -8,7 +8,7 @@ import bruce.roflcraft.rpg.character.stats.StatModifier;
  * This is currently not used
  * @author Lorrtath
  */
-public interface RPGStatListener 
+public interface IRPGStatListener 
 {
 	/**
 	 * Event called when an RPGStat has its value changed

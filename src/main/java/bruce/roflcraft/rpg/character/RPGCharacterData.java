@@ -2,9 +2,13 @@ package bruce.roflcraft.rpg.character;
 
 import bruce.roflcraft.handlers.RoflCraftPacketHandler;
 import bruce.roflcraft.network.Message.SkillPointPurchaseMessage;
+import bruce.roflcraft.network.Message.SkillPointSpentMessage;
+import bruce.roflcraft.rpg.character.Listeners.ISkillStatListener;
 import bruce.roflcraft.rpg.character.Race.IRace;
 import bruce.roflcraft.rpg.character.stats.AttributeCollection;
+import bruce.roflcraft.rpg.character.stats.Skill;
 import bruce.roflcraft.rpg.character.stats.SkillCollection;
+import bruce.roflcraft.rpg.character.stats.SkillIndex;
 import bruce.roflcraft.rpg.character.stats.SkillPointTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTBase;
@@ -34,6 +38,7 @@ public class RPGCharacterData implements IRPGCharacterData
 		m_attributes = new AttributeCollection();
 		m_skillPoints = new SkillPointTracker();
 		m_skills = new SkillCollection();
+		m_skills.setListener(this);
 	}
 	
 	@Override
@@ -59,6 +64,7 @@ public class RPGCharacterData implements IRPGCharacterData
 		m_attributes = existingData.getAttributes();
 		m_skillPoints = existingData.getSkillPointTracker();
 		m_skills = existingData.getSkills();
+		m_skills.setListener(this);
 	}
 	
 	@Override
@@ -68,6 +74,14 @@ public class RPGCharacterData implements IRPGCharacterData
 		ContributeToSkillPoint(Minecraft.getMinecraft().thePlayer.xpBarCap());
 		RoflCraftPacketHandler.sendToServer(new SkillPointPurchaseMessage(levels));
 	}
+	
+	@Override
+	public void spendSkillPoint(int amount, SkillIndex index)
+	{
+		RoflCraftPacketHandler.sendToServer(new SkillPointSpentMessage(amount, index));
+		m_skills.addToStat(amount, index);
+	}
+
 	
 	public void ContributeToSkillPoint(int xp)
 	{
@@ -97,6 +111,17 @@ public class RPGCharacterData implements IRPGCharacterData
 		// m_skillPoints.pointTrackerFromNBT((NBTTagList)nbtData.get(NBT_SKILL_POINTS_ID));
 		// m_skills.collectionFromNB((NBTTagList)nbtData.get(NBT_SKILL_STATS_ID));
 		// TODO Race NBT
+	}
+
+	/**
+	 * --- SkillStatListener event handling: ---
+	 */
+	
+	@Override
+	public void OnSkillValueChanged(Skill skillChanged, int amount) 
+	{
+		m_skillPoints.removePointToSpend(amount);
+		m_attributes.progressAttribute(skillChanged.getPrimaryAttribute());
 	}
 	
 }
