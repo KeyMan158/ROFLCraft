@@ -1,6 +1,6 @@
 package bruce.roflcraft.rpg;
 
-import com.sun.media.jfxmedia.events.PlayerEvent;
+//import com.sun.media.jfxmedia.events.PlayerEvent;
 
 import bruce.roflcraft.handlers.RoflCraftPacketHandler;
 import bruce.roflcraft.main.Reference;
@@ -8,6 +8,7 @@ import bruce.roflcraft.main.RoflCraft;
 import bruce.roflcraft.network.Message.RequestRPGCharacterSyncMessage;
 import bruce.roflcraft.rpg.character.IRPGCharacterData;
 import bruce.roflcraft.rpg.character.RPGCharacterProvider;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -26,9 +27,9 @@ public class RPGCapabilityHandler
 	public static final ResourceLocation CHARACTER_CAPABILITY = new ResourceLocation(Reference.MODID, "Character");
 	
 	@SubscribeEvent
-	public void attachCapability(AttachCapabilitiesEvent.Entity event)
+	public void attachCapability(AttachCapabilitiesEvent<Entity> event)
 	{
-		if (event.getEntity() instanceof EntityPlayer)
+		if (event.getObject() instanceof EntityPlayer)
 		{
 			event.addCapability(CHARACTER_CAPABILITY, new RPGCharacterProvider());
 			RoflCraftPacketHandler.sendToServer(new RequestRPGCharacterSyncMessage());

@@ -17,7 +17,7 @@ public class ROFLCraftBlocks
 	{
 		test_block = new TestBlock();
 		test_block.setUnlocalizedName("test_block");
-		test_block.setCreativeTab(CreativeTabs.tabTools);
+		test_block.setCreativeTab(CreativeTabs.TOOLS);
 	}
 	
 	public static void registerRenders()

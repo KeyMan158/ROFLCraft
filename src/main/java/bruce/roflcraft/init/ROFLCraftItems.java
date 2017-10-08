@@ -18,7 +18,7 @@ public class ROFLCraftItems
 	
 	public static void init()
 	{
-		test_item = registerItem(new Item(), "test_item", CreativeTabs.tabMisc).setUnlocalizedName("test_item").setCreativeTab(CreativeTabs.tabTools);
+		test_item = registerItem(new Item(), "test_item", CreativeTabs.MISC).setUnlocalizedName("test_item").setCreativeTab(CreativeTabs.TOOLS);
 	}
 	
 	

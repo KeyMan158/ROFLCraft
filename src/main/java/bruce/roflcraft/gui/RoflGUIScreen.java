@@ -61,7 +61,7 @@ public class RoflGUIScreen extends GuiScreen
 		//there is also a constructor overload with width & height
 
 		test = new SkillUpButton(0, this.width/2, this.height / 2, 20, 20, "+");
-		test.init(Minecraft.getMinecraft().thePlayer);
+		test.init(Minecraft.getMinecraft().player);
 		//a = new GuiButton(0, this.width/2 - 100, this.height / 2 - 24, "This is button 'A'");
 		//b = new GuiButton(1, this.width/2 - 100, this.height / 2 + 4, "This is not button 'A'");
 		

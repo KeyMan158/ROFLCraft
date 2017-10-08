@@ -10,7 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.InterningXmlVisitor;
+//import com.sun.xml.internal.bind.v2.runtime.unmarshaller.InterningXmlVisitor;
 
 import bruce.roflcraft.rpg.character.stats.AttributeCollection;
 import bruce.roflcraft.rpg.character.stats.SkillCollection;

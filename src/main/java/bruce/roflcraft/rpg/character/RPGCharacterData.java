@@ -70,8 +70,8 @@ public class RPGCharacterData implements IRPGCharacterData
 	@Override
 	public void PurchaseSkillPoint(int levels)
 	{
-		Minecraft.getMinecraft().thePlayer.removeExperienceLevel(levels);
-		ContributeToSkillPoint(Minecraft.getMinecraft().thePlayer.xpBarCap());
+		Minecraft.getMinecraft().player.removeExperienceLevel(levels);
+		ContributeToSkillPoint(Minecraft.getMinecraft().player.xpBarCap());
 		RoflCraftPacketHandler.sendToServer(new SkillPointPurchaseMessage(levels));
 	}
 	

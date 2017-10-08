@@ -1,9 +1,10 @@
 package bruce.roflcraft.rpg.character;
 
-import com.sun.media.jfxmedia.events.PlayerEvent;
+//import com.sun.media.jfxmedia.events.PlayerEvent;
 
 import bruce.roflcraft.handlers.RoflCraftPacketHandler;
 import bruce.roflcraft.network.Message.RPGCharacterSyncMessage;
+import bruce.roflcraft.network.Message.RequestRPGCharacterSyncMessage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,18 +31,18 @@ public class RPGCharacterEventHandler
 	{
 		EntityPlayer player = event.player;
 		IRPGCharacterData characterData = player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
-		player.addChatMessage(new TextComponentString("Mod load test sucsesfull"));
+		player.sendMessage(new TextComponentString("Mod load test sucsesfull"));
 		if(player instanceof EntityPlayerMP)
 		{
-			player.addChatMessage(new TextComponentString("Mod load test sucsesfull - Server Side"));
+			player.sendMessage(new TextComponentString("Mod load test sucsesfull - Server Side"));
 			syncClientToServer((EntityPlayerMP)player);
 		}
 		else
 		{
-			player.addChatMessage(new TextComponentString("Mod load test sucsesfull - Client Side"));
+			player.sendMessage(new TextComponentString("Mod load test sucsesfull - Client Side"));
 		}
 	}
-	
+		
 	/**
 	 * Called when a player dies or moves to another world
 	 * @param event
@@ -54,7 +55,6 @@ public class RPGCharacterEventHandler
 		characterData.Duplicate(event.getOriginal().getCapability(RPGCharacterProvider.CHAR_CAP, null));
 		if (player instanceof EntityPlayerMP)
 		{
-
 			syncClientToServer((EntityPlayerMP)player);
 		}
 	}

@@ -96,7 +96,7 @@ public class CharacterSheetGUI extends GuiScreen
 					this.height/2 - BOOK_HEIGHT/2 + SKILLS_TOP + (i * SKILL_FRAME_HEIGHT) + 3,
 					0);
 		}
-		IRPGCharacterData charData = Minecraft.getMinecraft().thePlayer.getCapability(RPGCharacterProvider.CHAR_CAP, null);
+		IRPGCharacterData charData = Minecraft.getMinecraft().player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
 		this.mc.fontRendererObj.drawString(charData.getSkillPointTracker().getStoredXP() + " / " + charData.getSkillPointTracker().xpToNext(),0, 0, 0);	
 		this.mc.fontRendererObj.drawString("Level : " + charData.getSkillPointTracker().getLevel(),0, 12, 0);	
 		super.drawScreen(mouseX, mouseY, partialTicks);

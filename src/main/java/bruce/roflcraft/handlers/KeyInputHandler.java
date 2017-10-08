@@ -24,7 +24,7 @@ public class KeyInputHandler
 		{
 			//run the test GUI
 			System.out.println("Opening Character Sheet");
-			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+			EntityPlayer player = Minecraft.getMinecraft().player;
 			player.openGui(RoflCraft.instance, GUIIDs.CharacterSheet.ordinal(), (World)player.getEntityWorld(), (int)player.posX, (int)player.posY, (int)player.posZ);
 		}
 	}

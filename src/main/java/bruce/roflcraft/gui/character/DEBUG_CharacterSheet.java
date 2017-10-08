@@ -60,7 +60,7 @@ public class DEBUG_CharacterSheet extends GuiScreen
 	@Override
 	public void initGui()
 	{
-		m_characterData = (RPGCharacterData)Minecraft.getMinecraft().thePlayer.getCapability(RPGCharacterProvider.CHAR_CAP, null);
+		m_characterData = (RPGCharacterData)Minecraft.getMinecraft().player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
 		m_componentManager = new GUIComponentManager();
 		BuySkillPointButton buyPointButton = new BuySkillPointButton();
 		buyPointButton.setTop(30);

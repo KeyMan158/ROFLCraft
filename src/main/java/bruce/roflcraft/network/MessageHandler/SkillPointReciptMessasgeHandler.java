@@ -21,7 +21,7 @@ public class SkillPointReciptMessasgeHandler implements IMessageHandler<SkillPoi
 	@Override
 	public IMessage onMessage(SkillPointReciptMessage message, MessageContext ctx) 
 	{
-		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		EntityPlayer player = Minecraft.getMinecraft().player;
 		IRPGCharacterData characterData = player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
 		characterData.getSkillPointTracker().setSkillPointTracker(message.getLevel(), message.getAvailable(), message.getXP());
 		return null;

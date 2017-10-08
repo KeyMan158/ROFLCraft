@@ -1,6 +1,6 @@
 package bruce.roflcraft.rpg.character.stats;
 
-import com.sun.glass.ui.Window.Level;
+//import com.sun.glass.ui.Window.Level;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

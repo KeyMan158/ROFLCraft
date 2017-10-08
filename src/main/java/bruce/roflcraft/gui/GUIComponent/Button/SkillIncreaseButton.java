@@ -26,7 +26,7 @@ public class SkillIncreaseButton extends GUIButtonComponent
 	protected void onButtonPressed(int mouseX, int mouseY)
 	{
 		super.onButtonPressed(mouseX, mouseY);
-		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+		EntityPlayer player = Minecraft.getMinecraft().player;
 		RPGCharacterData charaterData = (RPGCharacterData)player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
 		if (charaterData.getSkillPointTracker().getAvailablePoints() > 0)
 		{

@@ -9,7 +9,7 @@ public class TestBlock extends Block
 {
 	public TestBlock() 
 	{
-		super(Material.glass);
+		super(Material.GLASS);
 		setRegistryName("test_block");
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlock(this), getRegistryName());

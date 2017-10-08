@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 public class RPGCharacterProvider implements ICapabilitySerializable<NBTBase>
 {
 	@CapabilityInject(IRPGCharacterData.class)
-	public static final Capability<IRPGCharacterData> CHAR_CAP = null;
+	public static Capability<IRPGCharacterData> CHAR_CAP = null;
 	
 	private IRPGCharacterData instance = CHAR_CAP.getDefaultInstance();
 	
