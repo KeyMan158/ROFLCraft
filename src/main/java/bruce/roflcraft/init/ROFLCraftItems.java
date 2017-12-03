@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ROFLCraftItems 
@@ -42,7 +44,17 @@ public class ROFLCraftItems
 	
 	public static Item registerItem(Item item, String name, CreativeTabs tab)
 	{
-		GameRegistry.register(item, new ResourceLocation(Reference.MODID, name));
+		//GameRegistry.register(item, new ResourceLocation(Reference.MODID, name));
 		return item;
+	}
+	
+	/**
+	 * Register the test item object
+	 * @param event
+	 */
+	@SubscribeEvent
+	public void registerItems(RegistryEvent.Register<Item> event)
+	{
+		event.getRegistry().register(test_item);
 	}
 }

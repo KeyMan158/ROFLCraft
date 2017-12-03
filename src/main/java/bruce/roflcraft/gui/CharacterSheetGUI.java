@@ -87,18 +87,18 @@ public class CharacterSheetGUI extends GuiScreen
 		//Draw features with the font renderer
 		for (int i = 0; i < 5; i++) 
 		{
-			this.mc.fontRendererObj.drawString("Skill " + i, 
+			fontRenderer.drawString("Skill " + i, 
 					this.width/2 - BOOK_WIDTH/2 + SKILLS_LEFT + SKILL_TEXT_LEFT, 
 					this.height/2 - BOOK_HEIGHT/2 + SKILLS_TOP + (i * SKILL_FRAME_HEIGHT) + SKILL_TEXT_TOP,
 					0);
-			this.mc.fontRendererObj.drawString("" + i, 
+			fontRenderer.drawString("" + i, 
 					this.width/2 - BOOK_WIDTH/2 + SKILLS_LEFT + 3, 
 					this.height/2 - BOOK_HEIGHT/2 + SKILLS_TOP + (i * SKILL_FRAME_HEIGHT) + 3,
 					0);
 		}
 		IRPGCharacterData charData = Minecraft.getMinecraft().player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
-		this.mc.fontRendererObj.drawString(charData.getSkillPointTracker().getStoredXP() + " / " + charData.getSkillPointTracker().xpToNext(),0, 0, 0);	
-		this.mc.fontRendererObj.drawString("Level : " + charData.getSkillPointTracker().getLevel(),0, 12, 0);	
+		fontRenderer.drawString(charData.getSkillPointTracker().getStoredXP() + " / " + charData.getSkillPointTracker().xpToNext(),0, 0, 0);	
+		fontRenderer.drawString("Level : " + charData.getSkillPointTracker().getLevel(),0, 12, 0);	
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 	

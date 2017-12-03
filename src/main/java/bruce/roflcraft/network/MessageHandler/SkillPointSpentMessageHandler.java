@@ -18,7 +18,7 @@ public class SkillPointSpentMessageHandler implements IMessageHandler<SkillPoint
 		EntityPlayer player;
 		if(ctx.side == Side.SERVER)
 		{
-			player = ctx.getServerHandler().playerEntity;
+			player = ctx.getServerHandler().player;
 			RPGCharacterData charData = (RPGCharacterData)player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
 			charData.getSkills().addToStat(message.getPoints(), message.getIndex());
 		}

@@ -15,7 +15,7 @@ public class RequestRPGCharacterSyncMessageHandler implements IMessageHandler<Re
 	@Override
 	public RPGCharacterSyncMessage onMessage(RequestRPGCharacterSyncMessage message, MessageContext ctx) 
 	{
-		EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+		EntityPlayerMP player = ctx.getServerHandler().player;
 		IRPGCharacterData characterData = player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
 		return new RPGCharacterSyncMessage((NBTTagCompound)characterData.rpgCharacterToNBT());
 	}

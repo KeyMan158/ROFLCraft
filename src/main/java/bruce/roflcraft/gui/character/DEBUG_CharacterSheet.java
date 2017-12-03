@@ -24,15 +24,15 @@ public class DEBUG_CharacterSheet extends GuiScreen
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
 		m_componentManager.drawComponent(Minecraft.getMinecraft(), mouseX, mouseY);
-		fontRendererObj.drawStringWithShadow("Name : ", 16, 0, 16777215);
-		fontRendererObj.drawStringWithShadow("Level : " + m_characterData.getSkillPointTracker().getLevel(), 16, 16, 16777215);
-		fontRendererObj.drawStringWithShadow("Progress To Next : " + m_characterData.getSkillPointTracker().getStoredXP() + " / " + m_characterData.getSkillPointTracker().xpToNext(), 16, 32, 16777215);
-		fontRendererObj.drawStringWithShadow("Points Available : " + m_characterData.getSkillPointTracker().getAvailablePoints(), 16, 48, 16777215);
+		fontRenderer.drawStringWithShadow("Name : ", 16, 0, 16777215);
+		fontRenderer.drawStringWithShadow("Level : " + m_characterData.getSkillPointTracker().getLevel(), 16, 16, 16777215);
+		fontRenderer.drawStringWithShadow("Progress To Next : " + m_characterData.getSkillPointTracker().getStoredXP() + " / " + m_characterData.getSkillPointTracker().xpToNext(), 16, 32, 16777215);
+		fontRenderer.drawStringWithShadow("Points Available : " + m_characterData.getSkillPointTracker().getAvailablePoints(), 16, 48, 16777215);
 		int attTop = 80;
 		AttributeIndex[] attrIndexes = AttributeIndex.values();
 		for(int i = 0; i < m_characterData.getAttributes().count(); i++)
 		{
-			fontRendererObj.drawStringWithShadow(m_characterData.getAttributes().getStatName(i) + " : " + 
+			fontRenderer.drawStringWithShadow(m_characterData.getAttributes().getStatName(i) + " : " + 
 					m_characterData.getAttributes().getStatValue(i) + " (" +
 					m_characterData.getAttributes().getAttributeProgress(attrIndexes[i])+ "/3)", 16, attTop, 16777215);
 			attTop += 16;
@@ -40,7 +40,7 @@ public class DEBUG_CharacterSheet extends GuiScreen
 		int buttonTop = 0;
 		for(int i = 0; i < m_characterData.getSkills().count(); i++)
 		{
-			fontRendererObj.drawStringWithShadow(m_characterData.getSkills().getStatName(i) + " : " + m_characterData.getSkills().getStatValue(i), 216, buttonTop, 16777215);
+			fontRenderer.drawStringWithShadow(m_characterData.getSkills().getStatName(i) + " : " + m_characterData.getSkills().getStatValue(i), 216, buttonTop, 16777215);
 			buttonTop += 16;
 		}
 	}

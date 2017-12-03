@@ -29,9 +29,9 @@ public class SkillPointPurchaseMessageHandler implements IMessageHandler<SkillPo
 	@Override
 	public IMessage onMessage(SkillPointPurchaseMessage message, MessageContext ctx) 
 	{
-		EntityPlayerMP serverPlayer = ctx.getServerHandler().playerEntity;
+		EntityPlayerMP serverPlayer = ctx.getServerHandler().player;
 		IRPGCharacterData characterData = serverPlayer.getCapability(RPGCharacterProvider.CHAR_CAP, null);
-		serverPlayer.removeExperienceLevel(message.getXPLevels());
+		serverPlayer.addExperienceLevel(-1 * message.getXPLevels()); //removeExperienceLevel(message.getXPLevels());
 		int xpToSpend = serverPlayer.xpBarCap();
 		characterData.ContributeToSkillPoint(xpToSpend);
 		SkillPointTracker tracker = characterData.getSkillPointTracker();
