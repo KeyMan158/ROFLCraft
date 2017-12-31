@@ -21,8 +21,9 @@ public class StatModifier
 	private float m_timeRemaining;
 	
 	/**
-	 * @param value
-	 * @param duration
+	 * @param name The name / tag of the modifier
+	 * @param value The value of the modifier
+	 * @param duration The duration of the modifier
 	 */
 	public StatModifier(String name, int value,float duration)
 	{

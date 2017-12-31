@@ -23,7 +23,7 @@ public class RPGCharacterSyncMessageHandler implements IMessageHandler<RPGCharac
 		}
 		catch (Exception e)
 		{
-			// TODO This can take a while, so optimise a time out system.
+			// TODO This can take a while, so optimise ...
 			System.out.println("Failed to sync player data, attempting re-sync");
 			onMessage(message, ctx);
 		}

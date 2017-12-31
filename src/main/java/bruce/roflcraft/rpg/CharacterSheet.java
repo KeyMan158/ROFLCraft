@@ -1,5 +1,3 @@
-// TODO Redundant Class
-
 package bruce.roflcraft.rpg;
 
 import java.util.ArrayList;
@@ -7,6 +5,7 @@ import java.util.ArrayList;
 import bruce.roflcraft.settings.Attributes;
 import bruce.roflcraft.settings.Skills;
 
+@Deprecated
 public class CharacterSheet 
 {
 	private String name;

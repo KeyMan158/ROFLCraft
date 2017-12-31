@@ -49,6 +49,29 @@ public class RPGStat
 	{
 		return m_value;
 	}
+
+	/**
+	 * Gets the current modifiers value
+	 * @return The combined value of all modifiers
+	 */
+	public int getModifiersValue()
+	{
+		int value = 0;
+		for (int i = 0; i < m_modifiers.size(); i++)
+		{
+			value += m_modifiers.get(i).getValue();
+		}
+		return value;
+	}
+	
+	/**
+	 * Gets the fully modified RPGStat value
+	 * @return The stat value with all modifiers applied
+	 */
+	public int getModifiedValue()
+	{
+		return getValue() + getModifiersValue();
+	}
 	
 	/**
 	 * Gets the name of the RPGStat

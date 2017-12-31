@@ -26,7 +26,7 @@ import net.minecraft.server.MinecraftServer;
 public class RaceFileLoader 
 {	
 	private static final Logger LOG = LogManager.getLogger();
-	private static final String RACIAL_SAVE_PATH = "%s.txt";
+	private static final String RACIAL_SAVE_PATH = "\\%s.txt";
 	private static final String RACIAL_FILE_HEADER = "Starting racial properties for the %s race";
 	private static final String ERROR_SAVE_FAILED = "Failed to save %s racial properties";
 	private static final String ERROR_LOAD_FAILED = "Failed to load %s racial properties";
@@ -56,10 +56,14 @@ public class RaceFileLoader
 	 */
 	public static void createRaceFile(IRace race)
 	{
+		String filepath = getFilePath(race);
+		File file = null;
 		FileOutputStream fileOutputStream = null;
 		Properties raceProperties = createPropertiesObject(race);
 		try
 		{
+			file = new File(filepath);
+			file.getParentFile().mkdirs();
 			fileOutputStream = new FileOutputStream(getRacePropertiesFile(race));
 			raceProperties.store(fileOutputStream, String.format(RACIAL_FILE_HEADER, race.getName()));
 		}       

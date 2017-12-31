@@ -10,6 +10,7 @@ import bruce.roflcraft.rpg.character.stats.Skill;
 import bruce.roflcraft.rpg.character.stats.SkillCollection;
 import bruce.roflcraft.rpg.character.stats.SkillIndex;
 import bruce.roflcraft.rpg.character.stats.SkillPointTracker;
+import bruce.roflcraft.rpg.rolls.DiceRoller;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,6 +53,7 @@ public class RPGCharacterData implements IRPGCharacterData
 	{
 		return m_skillPoints;
 	}
+	
 	@Override
 	public SkillCollection getSkills()
 	{
@@ -89,6 +91,19 @@ public class RPGCharacterData implements IRPGCharacterData
 	}
 	
 	@Override
+	public int rollSkill(int skillIndex)
+	{
+		if(skillIndex < 0 || skillIndex >= m_skills.count())
+		{
+			return 0;
+		}
+		int diceRoll = DiceRoller.RollDice();
+		int skillModifier = m_skills.getStatModifiedValue(skillIndex);
+		int attrModifier = m_attributes.getStatValue(m_skills.getAttribute(skillIndex).ordinal());
+		return diceRoll + skillModifier + attrModifier ;
+	}
+
+	@Override
 	public NBTBase rpgCharacterToNBT() 
 	{
 		NBTTagCompound nbtData = new NBTTagCompound();
@@ -116,7 +131,7 @@ public class RPGCharacterData implements IRPGCharacterData
 	/**
 	 * --- SkillStatListener event handling: ---
 	 */
-	
+
 	@Override
 	public void OnSkillValueChanged(Skill skillChanged, int amount) 
 	{

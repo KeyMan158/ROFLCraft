@@ -13,6 +13,20 @@ public interface IRPGStatCollection
 	public int getStatValue(int index);
 	
 	/**
+	 * Gets the total modifiers value applied to this RPGStat
+	 * @param index The index of the RPGStat
+	 * @return The combined value of the modifiers
+	 */
+	public int getStatModifiersValue(int index);
+	
+	/**
+	 * Gets the fully modified RPGStat value
+	 * @param index The index of the RPGStat
+	 * @return
+	 */
+	public int getStatModifiedValue(int index);
+	
+	/**
 	 * Sets the value of the RPG stat.
 	 * @param index The index of the stat value to set
 	 * @param value The new value of the RPG stat

@@ -1,7 +1,5 @@
 package bruce.roflcraft.rpg.character.Race;
 
-//import com.sun.xml.internal.bind.v2.TODO;
-
 import bruce.roflcraft.rpg.character.stats.AttributeCollection;
 import bruce.roflcraft.rpg.character.stats.SkillCollection;
 

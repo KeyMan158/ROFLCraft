@@ -4,6 +4,7 @@ package bruce.roflcraft.rpg.character.Race;
  * This class is used for configurating and managing racial
  * defaults. This includes ensuring that the racial folders and config
  * files are included
+ * TODO .. Revise this after testing and full race implementation
  * @author Lorrtath
  *
  */
@@ -13,7 +14,6 @@ public class RaceManager
 	
 	public RaceManager()
 	{
-		// TODO .. Revise this after testing and full race implementation
 		m_races = new IRace[1];
 		m_races[0] = new Human();
 	}
@@ -36,7 +36,6 @@ public class RaceManager
 	 */
 	public IRace getRace(RaceIndex raceIndex)
 	{
-		// TODO .. Revise this after testing and full race implementation
 		return m_races[0];
 	}
 }

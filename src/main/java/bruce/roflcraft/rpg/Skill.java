@@ -1,7 +1,5 @@
-// TODO Redundant Class
-
 package bruce.roflcraft.rpg;
-
+@Deprecated
 public class Skill 
 {
 	private String name;

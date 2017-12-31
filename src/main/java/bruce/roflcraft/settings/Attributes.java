@@ -1,7 +1,6 @@
-// TODO Redundant Class
-
 package bruce.roflcraft.settings;
 
+@Deprecated
 public enum Attributes 
 {
 	STRENGTH,

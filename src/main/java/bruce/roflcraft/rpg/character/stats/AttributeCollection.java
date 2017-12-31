@@ -7,17 +7,12 @@ import net.minecraft.nbt.NBTTagList;
 public class AttributeCollection implements IRPGStatCollection
 {
 	private Attribute[] m_attributes;
-	private final int ATTRIBUTE_COUNT = 8;
+	private final int ATTRIBUTE_COUNT = 3;
 	private static final String[] NAMES = 
 	{
-		"STR", 
-		"AGI", 
-		"CON", 
-		"INT", 
-		"WIS", 
-		"CHA", 
-		"LUK", 
-		"MGK"
+		"BODY", 
+		"MIND", 
+		"SOUL"
 	};
 
 	public AttributeCollection()
@@ -25,15 +20,17 @@ public class AttributeCollection implements IRPGStatCollection
 		m_attributes = new Attribute[ATTRIBUTE_COUNT];
 		for(int i = 0; i < ATTRIBUTE_COUNT; i++)
 		{
-			m_attributes[i] = new Attribute(NAMES[i], 1, getAttributeType(AttributeIndex.values()[i]));
+			m_attributes[i] = new Attribute(NAMES[i], 1);//, getAttributeType(AttributeIndex.values()[i]));
 		}
 	}
 	
 	/**
 	 * Gets the attribute type
+	 * @Deprecated 
 	 * @param attribute
 	 * @return
 	 */
+	/*@Deprecated
 	public static AttributeType getAttributeType(AttributeIndex attribute)
 	{
 		switch (attribute) 
@@ -57,7 +54,7 @@ public class AttributeCollection implements IRPGStatCollection
 		default:
 			return null;
 		}
-	}
+	}*/
 
 	/**
 	 * Progresses an attribute by am amount
@@ -139,5 +136,25 @@ public class AttributeCollection implements IRPGStatCollection
 		{
 			m_attributes[i].statFromNBTData((NBTTagCompound)nbtData.get(i));
 		}
+	}
+
+	@Override
+	public int getStatModifiersValue(int index) 
+	{
+		if (index >= 0 && index < ATTRIBUTE_COUNT)
+		{
+			return m_attributes[index].getModifiersValue();
+		}
+		return 0;
+	}
+
+	@Override
+	public int getStatModifiedValue(int index) 
+	{
+		if (index >= 0 && index < ATTRIBUTE_COUNT)
+		{
+			return m_attributes[index].getModifiedValue();
+		}
+		return 0;
 	}
 }

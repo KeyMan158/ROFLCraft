@@ -59,6 +59,12 @@ public interface IRPGCharacterData extends ISkillStatListener
 	public void ContributeToSkillPoint(int xp);
 	
 	/**
+	 * Rolls an RPG skill at the given index and returns the total modified roll value
+	 * @param skillIndex The fully modified skill roll value
+	 */
+	public int rollSkill(int skillIndex);
+	
+	/**
 	 * Gets the character data as NBT data
 	 * @return The CharacterData object as NBT data
 	 */

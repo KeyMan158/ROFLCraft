@@ -119,7 +119,7 @@ public class SkillPointTracker
 	
 	/**
 	 * Sets the tracker from the NBT data
-	 * @param nbtData The NBT data to set from
+	 * @param nbtDataWrapper The NBT data to set from
 	 */
 	public void pointTrackerFromNBT(NBTTagList nbtDataWrapper)
 	{

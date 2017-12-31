@@ -3,6 +3,7 @@ package bruce.roflcraft.rpg.character.stats;
 import java.util.ArrayList;
 import java.util.List;
 
+import bruce.roflcraft.handlers.SkillHandler;
 import bruce.roflcraft.rpg.character.Listeners.ISkillStatListener;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,80 +13,10 @@ public class SkillCollection implements IRPGStatCollection
 {
 	private List<Skill> m_skills;
 	private ISkillStatListener m_statListenet;
-	// This bit is a mess ...
-	private static String[] NAMES = 
-		{
-			"Nature",
-			"Mining",
-			"Digging",
-			"Construction",
-			"Meele Damage",
-			"Meele Speed",
-			"Blocking",
-			"Archery",
-			"Carpentry",
-			"Smithing",
-			"Masonary",
-			"Survival",
-			"Schollarship"
-		};
-	private static AttributeIndex[] PRIMARYS = 
-		{
-			AttributeIndex.AT_WIS, 
-			AttributeIndex.AT_STR,
-			AttributeIndex.AT_CON,
-			AttributeIndex.AT_INT,
-			AttributeIndex.AT_STR,
-			AttributeIndex.AT_AGI,
-			AttributeIndex.AT_CON,
-			AttributeIndex.AT_AGI,
-			AttributeIndex.AT_AGI,
-			AttributeIndex.AT_STR,
-			AttributeIndex.AT_CON,
-			AttributeIndex.AT_WIS,
-			AttributeIndex.AT_INT
-		};
-	private static AttributeIndex[] SECONDARIES = 
-		{
-			AttributeIndex.AT_INT,
-			AttributeIndex.AT_CON,
-			AttributeIndex.AT_STR,
-			AttributeIndex.AT_CON,
-			AttributeIndex.AT_CHA,
-			AttributeIndex.AT_CON,
-			AttributeIndex.AT_INT,
-			AttributeIndex.AT_WIS,
-			AttributeIndex.AT_CHA,
-			AttributeIndex.AT_CHA,
-			AttributeIndex.AT_CHA,
-			AttributeIndex.AT_INT,
-			AttributeIndex.AT_WIS
-		};
-	private static SkillType[] TYPES = 
-		{
-			SkillType.SKILL_TYPE_GATHERING,
-			SkillType.SKILL_TYPE_GATHERING,
-			SkillType.SKILL_TYPE_GATHERING,
-			SkillType.SKILL_TYPE_GATHERING,
-			SkillType.SKILL_TYPE_COMBAT,
-			SkillType.SKILL_TYPE_COMBAT,
-			SkillType.SKILL_TYPE_COMBAT,
-			SkillType.SKILL_TYPE_COMBAT,
-			SkillType.SKILL_TYPE_CRAFTING,
-			SkillType.SKILL_TYPE_CRAFTING,
-			SkillType.SKILL_TYPE_CRAFTING,
-			SkillType.SKILL_TYPE_CRAFTING,
-			SkillType.SKILL_TYPE_CRAFTING
-		};
-	
 
 	public SkillCollection()
 	{
-		m_skills = new ArrayList<Skill>();
-		for (int i = 0; i < NAMES.length; i++)
-		{
-			m_skills.add(new Skill(NAMES[i],0, PRIMARYS[i], SECONDARIES[i], TYPES[i]));
-		}
+		m_skills = SkillHandler.makeSkillList();
 	}
 	
 	public void setListener(ISkillStatListener listener)
@@ -185,6 +116,20 @@ public class SkillCollection implements IRPGStatCollection
 		}
 		return index;
 	}
+	
+	/**
+	 * Gets the attribute associated with a skill at the given index
+	 * @param index The index of the given skill
+	 * @return The attribute index of the skill
+	 */
+	public AttributeIndex getAttribute(int index)
+	{
+		if(index >= 0 && index < m_skills.size())
+		{	
+			return m_skills.get(index).getPrimaryAttribute();
+		}
+		return null;
+	}
 
 	/**
 	 * Applies a modifier to the skill
@@ -235,8 +180,26 @@ public class SkillCollection implements IRPGStatCollection
 		for (int i = 0; i < count(); i++)
 		{
 			m_skills.get(i).SkillFromNBT((NBTTagCompound)nbtData.get(i));
-			//setStatValue(i, ((NBTTagCompound)nbtData.get(i)).getInteger(RPGStat.NBT_VALUE_TAG));
 		}
 	}
 
+	@Override
+	public int getStatModifiersValue(int index) 
+	{
+		if (index >= 0 && index < m_skills.size())
+		{
+			return m_skills.get(index).getModifiersValue();
+		}
+		return 0;
+	}
+
+	@Override
+	public int getStatModifiedValue(int index) 
+	{
+		if (index >= 0 && index < m_skills.size())
+		{
+			return m_skills.get(index).getModifiedValue();
+		}
+		return 0;
+	}
 }

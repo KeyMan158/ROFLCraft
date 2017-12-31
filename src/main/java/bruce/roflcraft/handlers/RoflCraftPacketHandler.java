@@ -34,9 +34,17 @@ public class RoflCraftPacketHandler
 	 */
 	public static void registerMessages()
 	{
-		registerMessage(SkillPointPurchaseMessageHandler.class, SkillPointPurchaseMessage.class, Side.SERVER);
 		registerMessage(SkillPointReciptMessasgeHandler.class, SkillPointPurchaseMessage.class, Side.CLIENT);
 		registerMessage(RPGCharacterSyncMessageHandler.class, RPGCharacterSyncMessage.class, Side.CLIENT);
+		registerServerMessages();
+	}
+	
+	/**
+	 * Registers the packets relevant only to the server.
+	 */
+	public static void registerServerMessages()
+	{
+		registerMessage(SkillPointPurchaseMessageHandler.class, SkillPointPurchaseMessage.class, Side.SERVER);
 		registerMessage(RequestRPGCharacterSyncMessageHandler.class, RequestRPGCharacterSyncMessage.class , Side.SERVER);
 		registerMessage(SkillPointSpentMessageHandler.class, SkillPointSpentMessage.class, Side.SERVER);
 	}
@@ -74,7 +82,7 @@ public class RoflCraftPacketHandler
 	/**
 	 * Sends the packet to all clients in a specific dimension / world
 	 * @param message The packet to send
-	 * @param dimensionID The id of the dimension
+	 * @param dimensionId The id of the dimension
 	 */
 	public static void sendToDimension(IMessage message, int dimensionId)
 	{
