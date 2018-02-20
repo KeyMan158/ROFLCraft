@@ -1,5 +1,7 @@
 package bruce.roflcraft.rpg.character.stats.skills;
 
+import java.util.List;
+
 import bruce.roflcraft.rpg.character.IRPGCharacterData;
 import bruce.roflcraft.rpg.character.RPGCharacterProvider;
 import bruce.roflcraft.rpg.character.stats.AttributeIndex;
@@ -10,39 +12,42 @@ import bruce.roflcraft.rpg.character.stats.skills.effects.SkillEffectBlockHarves
 import bruce.roflcraft.rpg.rolls.SkillRollTable;
 import bruce.roflcraft.rpg.rolls.SkillRollTableManager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemAxe;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
- * Class for the Mining skill
+ * This class represents the farming skill.
+ * This skill affets the use of spades, hoes and harvesting of plant blocks 
  * As this class uses forge event handling it should be registered
  * with the skill handler during common initialisation!  
  * @author Lorrtath
- *
  */
-public class SkillMining extends Skill
+public class SkillFarming extends Skill
 {
-	private static final SkillIndex SKILL_INDEX = SkillIndex.SKILL_MINING;
-	private static final AttributeIndex SKILL_ATTRIBUTE = AttributeIndex.AT_BODY;
+	private static final SkillIndex SKILL_INDEX = SkillIndex.SKILL_FARMING;
+	private static final AttributeIndex SKILL_ATTRIBUTE = AttributeIndex.AT_MIND;
 	private static final SkillType SKILL_TYPE = SkillType.SKILL_TYPE_GATHERING;
-	private static final String SKILL_NAME = "Mining";
-	private static final String SKILL_DESCR = "Affects use of a pickaxe to gather a block";
+	private static final String SKILL_NAME = "Farming";
+	private static final String SKILL_DESCR = "Affects the use of spades, hoes and harvesting of plant blocks";
 	private static final String THRESHOLD_0_DESCR = "50% chance that a block is droped";
 	private static final String THRESHOLD_1_DESCR = "75% chance that a block is dropped";
 	private static final String THRESHOLD_2_DESCR = "100% chance that a block is dropped";
 	private static final String THRESHOLD_3_DESCR = "100% chance that a block is dropped, 50% chance that 1 extra block is dropped";
 	private static final String THRESHOLD_4_DESCR = "100% chance that 2 blocks are dropped, 50% chance that a second block is dropped";
 	
-	public SkillMining()
+	public SkillFarming()
 	{
 		super(SKILL_NAME,0, SKILL_ATTRIBUTE, SKILL_TYPE);
 	}
 	
-	public SkillMining(NBTTagCompound nbtData) 
+	public SkillFarming(NBTTagCompound nbtData) 
 	{
 		super(nbtData);
 	}
@@ -61,7 +66,7 @@ public class SkillMining extends Skill
 	}
 	
 	@Override
-	public String getThresholdDescription(int index) 
+	public String getThresholdDescription(int index)
 	{
 		switch (index) 
 		{
@@ -77,13 +82,13 @@ public class SkillMining extends Skill
 			return THRESHOLD_4_DESCR;
 		default:
 			return "";
-		}
-	}
+		}	}
 
 	@Override
 	public String getSkillDescription() 
 	{
 		return SKILL_DESCR;
+
 	}
 
 	@Override
@@ -91,7 +96,7 @@ public class SkillMining extends Skill
 	{
 		return SKILL_INDEX.ordinal();
 	}
-
+	
 	/**
 	 * Event handler for when a block is harvested 
 	 * @param event
@@ -104,8 +109,7 @@ public class SkillMining extends Skill
 		{
 			return;
 		}
-		ItemStack heldItem = player.getHeldItem(EnumHand.MAIN_HAND);
-		if (heldItem.getItem().getClass() != ItemPickaxe.class)
+		if (!eventAppliesToSkill(event))
 		{
 			return;
 		}
@@ -115,4 +119,29 @@ public class SkillMining extends Skill
 		SkillEffectBlockHarvest.processBlockharvest(thresholdMet, event);
 	}
 	
+	/**
+	 * Checks to see if a spade or hoe was used, or if any of the items are plantable
+	 * @param event
+	 * @return
+	 */
+	private static boolean eventAppliesToSkill(net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent event)
+	{
+		ItemStack heldItem = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
+		if(heldItem.getItem().getClass() == ItemSpade.class || heldItem.getItem().getClass() == ItemHoe.class)
+		{
+			return true;
+		}
+		else
+		{
+			List<ItemStack> items = event.getDrops();
+			for (int i = 0; i < items.size(); i++)
+			{
+				if(items.get(i).getItem() instanceof IPlantable)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

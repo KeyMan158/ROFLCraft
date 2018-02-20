@@ -47,7 +47,7 @@ public class Attribute extends RPGStat
 	public void addToProgression()
 	{
 		m_progressToNext++;
-		if (m_progressToNext > PROGRESS_MAX)
+		if (m_progressToNext >= PROGRESS_MAX)
 		{
 			addToValue(1);
 			m_progressToNext = 0;

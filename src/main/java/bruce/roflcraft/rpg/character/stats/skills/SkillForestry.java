@@ -8,6 +8,7 @@ import bruce.roflcraft.rpg.character.stats.AttributeIndex;
 import bruce.roflcraft.rpg.character.stats.Skill;
 import bruce.roflcraft.rpg.character.stats.SkillIndex;
 import bruce.roflcraft.rpg.character.stats.SkillType;
+import bruce.roflcraft.rpg.character.stats.skills.effects.SkillEffectBlockHarvest;
 import bruce.roflcraft.rpg.rolls.DiceRoller;
 import bruce.roflcraft.rpg.rolls.SkillRollTable;
 import bruce.roflcraft.rpg.rolls.SkillRollTableManager;
@@ -96,7 +97,6 @@ public class SkillForestry extends Skill
 	
 	/**
 	 * Event handler for when a block is harvested 
-	 * TODO This is a mess, clean up ASAP once tested
 	 * @param event
 	 */
 	@SubscribeEvent
@@ -115,36 +115,6 @@ public class SkillForestry extends Skill
 		IRPGCharacterData data = player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
 		int roll = data.rollSkill(SKILL_INDEX.ordinal());
 		int thresholdMet = SkillRollTableManager.getTableThreshold(SKILL_INDEX.ordinal(), roll);
-		List<ItemStack> items = event.getDrops();
-		switch (thresholdMet) 
-		{
-		case 1:
-			event.setDropChance(0.75f);
-			break;
-		case 2:
-			event.setDropChance(1f);
-			break;
-		case 3:
-			if(DiceRoller.flipCoin())
-			{
-				for(int i = 0; i < items.size(); i++)
-				{
-					items.get(i).setCount(items.get(i).getCount() * 2);
-				}
-			}
-			break;
-		case 4:
-			if(DiceRoller.flipCoin())
-			{
-				for(int i = 0; i < items.size(); i++)
-				{
-					items.get(i).setCount(items.get(i).getCount() * 3);
-				}
-			}
-			break;
-		default:
-			event.setDropChance(0.5f);
-			break;
-		}
+		SkillEffectBlockHarvest.processBlockharvest(thresholdMet, event);
 	}
 }

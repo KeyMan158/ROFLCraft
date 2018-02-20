@@ -25,38 +25,6 @@ public class AttributeCollection implements IRPGStatCollection
 	}
 	
 	/**
-	 * Gets the attribute type
-	 * @Deprecated 
-	 * @param attribute
-	 * @return
-	 */
-	/*@Deprecated
-	public static AttributeType getAttributeType(AttributeIndex attribute)
-	{
-		switch (attribute) 
-		{
-		case AT_STR:
-			return AttributeType.BODY;
-		case AT_AGI:
-			return AttributeType.BODY;
-		case AT_CON:
-			return AttributeType.BODY;
-		case AT_INT:
-			return AttributeType.MIND;
-		case AT_WIS:
-			return AttributeType.MIND;
-		case AT_CHA:
-			return AttributeType.MIND;
-		case AT_LUK:
-			return AttributeType.SOUL;
-		case AT_MGK:
-			return AttributeType.SOUL;
-		default:
-			return null;
-		}
-	}*/
-
-	/**
 	 * Progresses an attribute by am amount
 	 * @param index The attribute to progress
 	 */

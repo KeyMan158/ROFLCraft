@@ -7,7 +7,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import bruce.roflcraft.rpg.character.stats.Skill;
+import bruce.roflcraft.rpg.character.stats.skills.SkillFarming;
 import bruce.roflcraft.rpg.character.stats.skills.SkillForestry;
+import bruce.roflcraft.rpg.character.stats.skills.SkillHunting;
+import bruce.roflcraft.rpg.character.stats.skills.SkillMining;
 import bruce.roflcraft.rpg.rolls.SkillRollTable;
 import bruce.roflcraft.rpg.rolls.SkillRollTableManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,14 +23,6 @@ import scala.reflect.internal.Trees.This;
  * methods
  * To expand the available skills list, register custom skills via the registerSkill method!
  * @author Lorrtath
-
-
-nsfw-lsfw
-All things NSFW.
-Search
-
-LOAD MORE MESSAGES
-
  *
  */
 public class SkillHandler 
@@ -45,11 +40,33 @@ public class SkillHandler
 	{
 		m_skills = new ArrayList<Class<? extends Skill>>();
 		
+		/** --- Setup Forestry Skill --- */
 		registerSkill(SkillForestry.class);
 		SkillRollTable forestryTable = new SkillRollTable();
 		forestryTable.init(SkillForestry.class.getSimpleName());
 		SkillForestry.assignThresholdDescriptions(forestryTable);
 		SkillRollTableManager.registerRollTable(forestryTable);
+		
+		/** --- Setup Mining Skill --- */
+		registerSkill(SkillMining.class);
+		SkillRollTable miningTable = new SkillRollTable();
+		miningTable.init(SkillMining.class.getSimpleName());
+		SkillMining.assignThresholdDescriptions(miningTable);
+		SkillRollTableManager.registerRollTable(miningTable);
+		
+		/** --- Setup Farming Skill --- */
+		registerSkill(SkillFarming.class);
+		SkillRollTable farmingTable = new SkillRollTable();
+		farmingTable.init(SkillFarming.class.getSimpleName());
+		SkillFarming.assignThresholdDescriptions(farmingTable);
+		SkillRollTableManager.registerRollTable(farmingTable);
+		
+		/** --- Setup Hunting Skill --- */
+		registerSkill(SkillHunting.class);
+		SkillRollTable huntingTable = new SkillRollTable();
+		huntingTable.init(SkillHunting.class.getSimpleName());
+		SkillHunting.assignThresholdDescriptions(huntingTable);
+		SkillRollTableManager.registerRollTable(huntingTable);
 	}
 	
 	/**
