@@ -3,6 +3,7 @@ package bruce.roflcraft.proxy;
 import bruce.roflcraft.handlers.GUIHandler;
 import bruce.roflcraft.handlers.RoflCraftPacketHandler;
 import bruce.roflcraft.handlers.SkillHandler;
+import bruce.roflcraft.init.ROFLCraftItems;
 import bruce.roflcraft.main.RoflCraft;
 import bruce.roflcraft.rpg.RPGCapabilityHandler;
 import bruce.roflcraft.rpg.character.IRPGCharacterData;
@@ -48,7 +49,6 @@ public class CommonProxy
 		//Register event handlers
 		MinecraftForge.EVENT_BUS.register(new RPGCapabilityHandler());
 		MinecraftForge.EVENT_BUS.register(new RPGCharacterEventHandler());
-		
 	}
 	
 	public void postInit(FMLPostInitializationEvent event)

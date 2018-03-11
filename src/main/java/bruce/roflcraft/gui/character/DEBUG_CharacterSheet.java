@@ -3,6 +3,7 @@ package bruce.roflcraft.gui.character;
 import bruce.roflcraft.gui.GUIComponent.GUIComponentManager;
 import bruce.roflcraft.gui.GUIComponent.Button.BuySkillPointButton;
 import bruce.roflcraft.gui.GUIComponent.Button.SkillIncreaseButton;
+import bruce.roflcraft.gui.GUIComponent.CharacterSheet.AttributeFrame;
 import bruce.roflcraft.rpg.character.RPGCharacterData;
 import bruce.roflcraft.rpg.character.RPGCharacterProvider;
 import bruce.roflcraft.rpg.character.stats.AttributeIndex;
@@ -67,8 +68,14 @@ public class DEBUG_CharacterSheet extends GuiScreen
 		m_componentManager.register(buyPointButton);
 		int buttonTop = 0;
 		SkillIndex[] indexes = SkillIndex.values();
-		for(int i = 0; i < m_characterData.getSkills().count(); i++)
+		for (int i = 0; i < m_characterData.getAttributes().count(); i++)
 		{
+			AttributeFrame frame = new AttributeFrame(AttributeIndex.values()[i]);
+			frame.setTop(i * frame.getHeight());
+			m_componentManager.register(frame);
+		}
+		for(int i = 0; i < m_characterData.getSkills().count(); i++)
+		{			
 			SkillIncreaseButton skillButton = new SkillIncreaseButton();
 			skillButton.setSkillIndex(indexes[i]);
 			skillButton.setTop(buttonTop);
