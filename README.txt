@@ -1,59 +1,57 @@
 -------------------------------------------
-Source installation information for modders
+ROFLCraft
 -------------------------------------------
-This code follows the Minecraft Forge installation methodology. It will apply
-some small patches to the vanilla MCP source code, giving you and it access 
-to some of the data and functions you need to build a successful mod.
 
-Note also that the patches are built against "unrenamed" MCP source code (aka
-srgnames) - this means that you will not be able to read them directly against
-normal code.
+The ROFLCraft MOD is developed by Lorrtath, Keyman and Tyruss with the purpose of bringing RPG game elements into Minecraft.
 
-Source pack installation information:
+This MOD has been built using the FORGE API, and should be loaded with the relevant FML procedure.
 
-Standalone source installation
+This mods development has been split into the following distinct phases:
+
+    1) RPG
+    2) Social
+    3) Rouge
+    4) Species
+    5) Fey
+    6) Magic
+    n) Combat, powers & classes
+
+RPG Phase[1] (Alpha V0.1)
 ==============================
 
-Step 1: Open your command-line and browse to the folder where you extracted the zip file.
+The RPG phase of development allows for the core RPG element and roll systems. This will become the backbone of the entire MOD with all further phased building upon the core content here.
 
-Step 2: Once you have a command window up in the folder that the downloaded material was placed, type:
+In terms of gameplay, this will mainly focus on Attributes, Stats & Skills. We have had discussions around combat, powers and classes. This will likely be done in parallel / spread across all the other phases as the various systems enable features.
 
-Windows: "gradlew setupDecompWorkspace"
-Linux/Mac OS: "./gradlew setupDecompWorkspace"
+This will be referred to as phase [n].
 
-Step 3: After all that finished, you're left with a choice.
-For eclipse, run "gradlew eclipse" (./gradlew eclipse if you are on Mac/Linux)
+Social Phase[2] (Alpha V0.2)
+==============================
 
-If you preffer to use IntelliJ, steps are a little different.
-1. Open IDEA, and import project.
-2. Select your build.gradle file and have it import.
-3. Once it's finished you must close IntelliJ and run the following command:
+The Social phase is designed to support in game character dialogue options, introduce speech / persuasion-based skills and overhaul trading. This will also include the addition of a purse and currency system.
 
-"gradlew genIntellijRuns" (./gradlew genIntellijRuns if you are on Mac/Linux)
+This Social component will allow for "GMs" to create dialogue choice trees and script their own adventures. This will also support more advanced NPC creation / setup options; however, this will be further developed in one of the future phases.
 
-Step 4: The final step is to open Eclipse and switch your workspace to /eclipse/ (if you use IDEA, it should automatically start on your project)
+Rouge Phase[3] (Alpha V0.3)
+==============================
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can run "gradlew --refresh-dependencies" to refresh the local cache. "gradlew clean" to reset everything {this does not effect your code} and then start the processs again.
+The Rouge phase will contain several features that afford players better stealth related skills and gameplay mechanics, such as locks, lockpicking, stealth checks, pick pocketing and associated combat & dialogue features.
 
-Should it still not work, 
-Refer to #ForgeGradle on EsperNet for more information about the gradle environment.
+Species Phase[4] (Alpha V0.4)
+==============================
 
-Tip:
-If you do not care about seeing Minecraft's source code you can replace "setupDecompWorkspace" with one of the following:
-"setupDevWorkspace": Will patch, deobfusicated, and gather required assets to run minecraft, but will not generated human readable source code.
-"setupCIWorkspace": Same as Dev but will not download any assets. This is useful in build servers as it is the fastest because it does the least work.
+The purpose of the species phase is to allow for character and NPC diversity across more than human and villager/illager.
 
-Tip:
-When using Decomp workspace, the Minecraft source code is NOT added to your workspace in a editable way. Minecraft is treated like a normal Library. Sources are there for documentation and research purposes and usually can be accessed under the 'referenced libraries' section of your IDE.
+This phase will also likely contain an assortment of support features and items to facilitate other elements of gameplay.
 
-Forge source installation
-=========================
-MinecraftForge ships with this code and installs it as part of the forge
-installation process, no further action is required on your part.
+Fey Phase[5] (Alpha V0.5)
+==============================
 
-LexManos' Install Video
-=======================
-https://www.youtube.com/watch?v=8VEdtQLuLO0&feature=youtu.be
+The Fey phase will be an extension of the species and a pre-curser to the magic phase. It is yet to be decided if there will be a Fey realm, but conceptually this will aim to mimic the workings and species of the Fey realms found in Wizards D&D Patrick Rothfuss's Kingkiller chronicles.
 
-For more details update more often refer to the Forge Forums:
-http://www.minecraftforge.net/forum/index.php/topic,14048.0.html
+Magic Phase[6] (Alpha V0.6)
+==============================
+
+Magic shall be the last phase of development, and potentially quite large. We are yet to define how it will work completely and while we have some ideas, as to how it will work, it is the lowest priority at the moment in terms of development and scoping.
+
+
