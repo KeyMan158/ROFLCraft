@@ -131,13 +131,13 @@ public class GUIComponentManager  implements IGUIComponent
 	}
 
 	@Override
-	public void drawComponent(Minecraft mc, int mouseX, int mouseY) 
+	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds) 
 	{
 		for (IGUIComponent iguiComponent : m_components) 
 		{
 			if(iguiComponent.getVisibility())
 			{
-				iguiComponent.drawComponent(mc, mouseX, mouseY);
+				iguiComponent.drawComponent(mc, mouseX, mouseY, deltaSeconds);
 			}
 		}		
 	}

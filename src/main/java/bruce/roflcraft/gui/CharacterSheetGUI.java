@@ -20,6 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import scala.reflect.internal.Trees.This;
 
+@Deprecated
 public class CharacterSheetGUI extends GuiScreen
 {	
 	//Constants:
@@ -57,7 +58,7 @@ public class CharacterSheetGUI extends GuiScreen
 		//this.mc.getTextureManager().bindTexture(testAnimation.getResourceLocation());
 		//this.drawTexturedModalRect(0, 0, testAnimation.getLeft() ,testAnimation.getTop(), testAnimation.getWidth(), testAnimation.getHeight());
 		
-		testManager.drawComponent(this.mc, mouseX, mouseY);
+		testManager.drawComponent(this.mc, mouseX, mouseY, partialTicks);
 		
 		//Draw GUI content to the screen (called every tick)
 		//this.drawDefaultBackground();//Set the background to the default value

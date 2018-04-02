@@ -62,7 +62,7 @@ public abstract class GUIButtonComponent extends Gui implements IGUIComponent
 	}
 
 	@Override
-	public void drawComponent(Minecraft mc, int mouseX, int mouseY)
+	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds)
 	{
 		boolean mouseIsOver = isMouseOver(mouseX, mouseY);
 		if(mouseIsOver)

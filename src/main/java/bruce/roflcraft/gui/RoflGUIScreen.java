@@ -17,6 +17,7 @@ import net.minecraft.client.gui.GuiControls;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 
+@Deprecated
 public class RoflGUIScreen extends GuiScreen
 {
 	//public static final int GUIID = GUIIDs.CharacterSheet.ordinal();

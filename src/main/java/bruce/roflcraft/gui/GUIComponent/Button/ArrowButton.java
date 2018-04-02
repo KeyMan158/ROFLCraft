@@ -43,9 +43,9 @@ public class ArrowButton extends GUIButtonComponent
 	}
 
 	@Override
-	public void drawComponent(Minecraft mc, int mouseX, int mouseY)
+	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds)
 	{
-		super.drawComponent(mc, mouseX, mouseY);
+		super.drawComponent(mc, mouseX, mouseY, deltaSeconds);
 		m_tickIndex++;
 		updateImageIndexes();
 		mc.getTextureManager().bindTexture(BUTTON_RESOURCE);

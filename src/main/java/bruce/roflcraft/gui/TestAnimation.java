@@ -3,6 +3,7 @@ package bruce.roflcraft.gui;
 import bruce.roflcraft.main.Reference;
 import net.minecraft.util.ResourceLocation;
 
+@Deprecated
 public class TestAnimation 
 {
 	private int m_tickIndex;

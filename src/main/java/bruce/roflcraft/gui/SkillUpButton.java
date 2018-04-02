@@ -13,7 +13,7 @@ import scala.reflect.internal.Trees.Super;
 //=============================================
 //This class is just for testing & DEV purposes
 //=============================================
-
+@Deprecated
 public class SkillUpButton extends GuiButton
 {
 	//Constants:

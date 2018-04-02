@@ -1,5 +1,7 @@
 package bruce.roflcraft.gui.GUIComponent.CharacterSheet;
 
+import org.lwjgl.opengl.GL11;
+
 import bruce.roflcraft.gui.GUIComponent.IGUIComponent;
 import bruce.roflcraft.main.Reference;
 import bruce.roflcraft.rpg.character.RPGCharacterData;
@@ -10,18 +12,27 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * This class provides the GUI for an attribute
+ * within the character sheet interface
+ * @author Lorrtath
+ *
+ */
 public class AttributeFrame extends Gui implements IGUIComponent
 {
 	private static final String FRAME_TEXTURE_NAME = "attributeframe.png";
 	private static final ResourceLocation FRAME_RESOURCE = new ResourceLocation(Reference.MODID , "textures/gui/" + FRAME_TEXTURE_NAME);
 	
-	private static final int FRAME_HEIGHT = 38;
-	private static final int FRAME_WIDTH = 38;
+	private static final int FRAME_HEIGHT = 64;
+	private static final int FRAME_WIDTH = 64;
 	
-	private static final int XP_BAR_TOP = 38;
-	private static final int XP_BAR_LEFT = 0;
-	private static final int XP_BAR_HEIGHT = 6;
-	private static final int XP_BAR_WIDTH = 38;
+	private static final int FRAME_BACK_TOP = 16;
+	private static final int FRAME_BACK_LEFT = 64;
+	private static final int FRAME_BACK_HEIGHT = 32;
+	private static final int FRAME_BACK_WIDTH = 32;
+	private static final int FRAME_BACK_MARGIN = 16;
+	private static final int FRAME_BACK_COUNT = 6;
+	private static final float FRAME_BACK_TICK_DUR = 3f;
 	
 	private int m_parentLeft;
 	private int m_parentTop;
@@ -31,6 +42,8 @@ public class AttributeFrame extends Gui implements IGUIComponent
 	private boolean m_isVisable;
 	private AttributeIndex m_attribute;
 	private AttributeCollection m_attributes;
+	private int m_backgroundIndex;
+	private float m_backgroundTickCounter;
 	
 	public AttributeFrame(AttributeIndex attribute)
 	{
@@ -40,6 +53,8 @@ public class AttributeFrame extends Gui implements IGUIComponent
 		m_parentTop = 0;
 		m_left = 0;
 		m_top = 0;
+		m_backgroundIndex = 0;
+		m_backgroundTickCounter = 0;
 	}
 	
 	@Override
@@ -50,18 +65,22 @@ public class AttributeFrame extends Gui implements IGUIComponent
 	}
 	
 	@Override
-	public void drawComponent(Minecraft mc, int mouseX, int mouseY) 
+	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds) 
 	{
 		if(m_isVisable)
 		{
+			updateTickIndexes(deltaSeconds);
 			mc.getTextureManager().bindTexture(FRAME_RESOURCE);
-			// Draw XP bar Background:
-			drawTexturedModalRect(getActualLeft(), getActualTop() + FRAME_HEIGHT, XP_BAR_LEFT, XP_BAR_TOP + (2* XP_BAR_HEIGHT), XP_BAR_WIDTH, XP_BAR_HEIGHT);
-			// Draw Xp:
-			int xpWidth = (int) (((XP_BAR_WIDTH - 2) / 3) * m_attributes.getAttributeProgress(m_attribute)); // Make this tick based
-			drawTexturedModalRect(getActualLeft(), getActualTop() + FRAME_HEIGHT, XP_BAR_LEFT, XP_BAR_TOP + XP_BAR_HEIGHT, xpWidth, XP_BAR_HEIGHT);
-			//Draw the frame:
-			drawTexturedModalRect(getActualLeft(), getActualTop(), 0, 0, FRAME_WIDTH, FRAME_HEIGHT + XP_BAR_HEIGHT);
+			// Draw background
+			drawTexturedModalRect(
+					getActualLeft() + FRAME_BACK_MARGIN, 
+					getActualTop() + FRAME_BACK_MARGIN, 
+					FRAME_BACK_LEFT + m_backgroundIndex * FRAME_BACK_WIDTH, 
+					FRAME_BACK_TOP + m_attribute.ordinal() * FRAME_HEIGHT, 
+					FRAME_BACK_WIDTH, 
+					FRAME_BACK_HEIGHT);
+			// Draw forground
+			drawTexturedModalRect(getActualLeft(), getActualTop(), 0, 0 + m_attribute.ordinal() * FRAME_HEIGHT , FRAME_WIDTH, FRAME_HEIGHT);
 		}
 	}
 	
@@ -109,7 +128,7 @@ public class AttributeFrame extends Gui implements IGUIComponent
 	@Override
 	public int getHeight() 
 	{
-		return FRAME_HEIGHT + XP_BAR_HEIGHT;
+		return FRAME_HEIGHT;
 	}
 	
 	@Override
@@ -124,5 +143,21 @@ public class AttributeFrame extends Gui implements IGUIComponent
 		m_isVisable = visability;
 	}
 	
-	
+	/**
+	 * Method for updating animation tick counters etc
+	 * @param deltaSeconds The time since the last frame
+	 */
+	private void updateTickIndexes(float deltaSeconds)
+	{
+		m_backgroundTickCounter += deltaSeconds;
+		if(m_backgroundTickCounter >= FRAME_BACK_TICK_DUR)
+		{
+			m_backgroundTickCounter = 0;
+			m_backgroundIndex ++;
+		}
+		if(m_backgroundIndex >= FRAME_BACK_COUNT)
+		{
+			m_backgroundIndex = 0;
+		}
+	}
 }

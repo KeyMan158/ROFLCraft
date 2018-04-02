@@ -16,8 +16,9 @@ public interface IGUIComponent
 	
 	/**
 	 * Draws the component	
+	 * @param deltaSeconds TODO
 	 */
-	public void drawComponent(Minecraft mc, int mouseX, int mouseY);
+	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds);
 	
 	/**
 	 * Gets the top value

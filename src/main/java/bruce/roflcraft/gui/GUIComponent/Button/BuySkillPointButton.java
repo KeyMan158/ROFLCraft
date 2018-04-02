@@ -34,9 +34,9 @@ public class BuySkillPointButton  extends GUIButtonComponent
 	}
 	
 	@Override
-	public void drawComponent(Minecraft mc, int mouseX, int mouseY)
+	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds)
 	{
-		super.drawComponent(mc, mouseX, mouseY);
+		super.drawComponent(mc, mouseX, mouseY, deltaSeconds);
 		mc.getTextureManager().bindTexture(BUTTON_RESOURCE);
 		drawTexturedModalRect(getActualLeft(), getActualTop(), 1, 1, WIDTH, HEIGHT);
 	}

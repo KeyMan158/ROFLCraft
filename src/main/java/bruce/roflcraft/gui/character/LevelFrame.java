@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * Object for handling the level frame
  * @author Lorrtath
  */
+@Deprecated
 @SideOnly(Side.CLIENT)
 public class LevelFrame extends Gui implements IGUIComponent, IXPVisual
 {
@@ -37,7 +38,7 @@ public class LevelFrame extends Gui implements IGUIComponent, IXPVisual
 	}
 
 	@Override
-	public void drawComponent(Minecraft mc, int mouseX, int mouseY) 
+	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds) 
 	{
 		mc.getTextureManager().bindTexture(RESOURCE);
 		drawTexturedModalRect(m_left, m_top, FRAME_LEFT, FRAME_TOP, FRAME_WIDTH, FRAME_HEIGHT);

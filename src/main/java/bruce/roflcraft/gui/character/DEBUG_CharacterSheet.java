@@ -3,6 +3,7 @@ package bruce.roflcraft.gui.character;
 import bruce.roflcraft.gui.GUIComponent.GUIComponentManager;
 import bruce.roflcraft.gui.GUIComponent.Button.BuySkillPointButton;
 import bruce.roflcraft.gui.GUIComponent.Button.SkillIncreaseButton;
+import bruce.roflcraft.gui.GUIComponent.CharacterSheet.AtributeDialComponent;
 import bruce.roflcraft.gui.GUIComponent.CharacterSheet.AttributeFrame;
 import bruce.roflcraft.rpg.character.RPGCharacterData;
 import bruce.roflcraft.rpg.character.RPGCharacterProvider;
@@ -16,6 +17,7 @@ import net.minecraft.client.gui.GuiScreen;
  * basic functionality without the artwork of the final character sheet
  * @author Lorrtath
  */
+@Deprecated
 public class DEBUG_CharacterSheet extends GuiScreen
 {
 	private RPGCharacterData m_characterData;
@@ -24,7 +26,7 @@ public class DEBUG_CharacterSheet extends GuiScreen
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
-		m_componentManager.drawComponent(Minecraft.getMinecraft(), mouseX, mouseY);
+		m_componentManager.drawComponent(Minecraft.getMinecraft(), mouseX, mouseY, partialTicks);
 		fontRenderer.drawStringWithShadow("Name : ", 16, 0, 16777215);
 		fontRenderer.drawStringWithShadow("Level : " + m_characterData.getSkillPointTracker().getLevel(), 16, 16, 16777215);
 		fontRenderer.drawStringWithShadow("Progress To Next : " + m_characterData.getSkillPointTracker().getStoredXP() + " / " + m_characterData.getSkillPointTracker().xpToNext(), 16, 32, 16777215);
@@ -68,12 +70,14 @@ public class DEBUG_CharacterSheet extends GuiScreen
 		m_componentManager.register(buyPointButton);
 		int buttonTop = 0;
 		SkillIndex[] indexes = SkillIndex.values();
-		for (int i = 0; i < m_characterData.getAttributes().count(); i++)
+		/*for (int i = 0; i < m_characterData.getAttributes().count(); i++)
 		{
 			AttributeFrame frame = new AttributeFrame(AttributeIndex.values()[i]);
 			frame.setTop(i * frame.getHeight());
 			m_componentManager.register(frame);
-		}
+		}*/
+		AtributeDialComponent dial = new AtributeDialComponent();
+		m_componentManager.register(dial);
 		for(int i = 0; i < m_characterData.getSkills().count(); i++)
 		{			
 			SkillIncreaseButton skillButton = new SkillIncreaseButton();
