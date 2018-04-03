@@ -19,6 +19,8 @@ public class GUIComponentManager  implements IGUIComponent
 	private int m_parentTop;
 	private int m_top;
 	private boolean m_visability;
+	private IGUIComponent m_parent;
+	private GUIComponentScreen m_root;
 	
 	public GUIComponentManager()
 	{
@@ -94,6 +96,8 @@ public class GUIComponentManager  implements IGUIComponent
 	public void register(IGUIComponent component)
 	{
 		m_components.add(component);
+		component.registerParent(this);
+		component.registerRoot(m_root);
 	}
 	
 	/**
@@ -208,5 +212,38 @@ public class GUIComponentManager  implements IGUIComponent
 		{
 			hideAll();
 		}
+	}
+
+	@Override
+	public void registerParent(IGUIComponent parent) 
+	{
+		m_parent = parent;
+		m_root = m_parent.getRoot();
+		for(int i = 0; i < m_components.size(); i++)
+		{
+			m_components.get(i).registerRoot(m_root);
+		}
+	}
+
+	@Override
+	public IGUIComponent getParent() 
+	{
+		return m_parent;
+	}
+
+	@Override
+	public void registerRoot(GUIComponentScreen root) 
+	{
+		m_root = root;
+		for(int i = 0; i < m_components.size(); i++)
+		{
+			m_components.get(i).registerRoot(m_root);
+		}
+	}
+
+	@Override
+	public GUIComponentScreen getRoot() 
+	{
+		return m_root;
 	}
 }

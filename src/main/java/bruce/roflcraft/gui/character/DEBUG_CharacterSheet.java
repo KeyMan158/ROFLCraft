@@ -63,19 +63,19 @@ public class DEBUG_CharacterSheet extends GuiScreen
 	@Override
 	public void initGui()
 	{
-		m_characterData = (RPGCharacterData)Minecraft.getMinecraft().player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
+		/*m_characterData = (RPGCharacterData)Minecraft.getMinecraft().player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
 		m_componentManager = new GUIComponentManager();
 		BuySkillPointButton buyPointButton = new BuySkillPointButton();
 		buyPointButton.setTop(30);
 		m_componentManager.register(buyPointButton);
 		int buttonTop = 0;
 		SkillIndex[] indexes = SkillIndex.values();
-		/*for (int i = 0; i < m_characterData.getAttributes().count(); i++)
+		for (int i = 0; i < m_characterData.getAttributes().count(); i++)
 		{
 			AttributeFrame frame = new AttributeFrame(AttributeIndex.values()[i]);
 			frame.setTop(i * frame.getHeight());
 			m_componentManager.register(frame);
-		}*/
+		}
 		AtributeDialComponent dial = new AtributeDialComponent();
 		m_componentManager.register(dial);
 		for(int i = 0; i < m_characterData.getSkills().count(); i++)
@@ -87,6 +87,6 @@ public class DEBUG_CharacterSheet extends GuiScreen
 			m_componentManager.register(skillButton);
 			buttonTop += 16;
 		}
-		m_componentManager.init(0, 0);
+		m_componentManager.init(0, 0);*/
 	}
 }

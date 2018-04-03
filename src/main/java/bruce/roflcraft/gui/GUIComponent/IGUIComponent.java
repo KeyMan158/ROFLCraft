@@ -75,4 +75,28 @@ public interface IGUIComponent
 	 * @param visability The visibility of the component
 	 */
 	public void setVisibility(boolean visability);
+	
+	/**
+	 * Registers the parent component
+	 * @param parent The parent component object
+	 */
+	public void registerParent(IGUIComponent parent);
+	
+	/**
+	 * Gets the parent component
+	 * @return The parent component
+	 */
+	public IGUIComponent getParent();
+	
+	/**
+	 * Registers the root component
+	 * @param root The root component
+	 */
+	public void registerRoot(GUIComponentScreen root);
+	
+	/**
+	 * Gets the registered root component
+	 * @return The root component
+	 */
+	public GUIComponentScreen getRoot();
 }

@@ -1,5 +1,8 @@
 package bruce.roflcraft.gui.GUIComponent.CharacterSheet;
 
+import org.lwjgl.opengl.GL11;
+
+import bruce.roflcraft.gui.GUIComponent.GUIComponentScreen;
 import bruce.roflcraft.gui.GUIComponent.IGUIComponent;
 import bruce.roflcraft.main.Reference;
 import bruce.roflcraft.rpg.character.stats.AttributeCollection;
@@ -16,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
  */
 public class AtributeDialComponent extends Gui implements IGUIComponent
 {
-	private static final String DIAL_TEXTURE_NAME = "attributedial.png";
+	private static final String DIAL_TEXTURE_NAME = "attribute_dial.png";
 	private static final ResourceLocation DIAL_RESOURCE = new ResourceLocation(Reference.MODID , "textures/gui/" + DIAL_TEXTURE_NAME);
 	private static final int WIDTH = 128;
 	private static final int HEIGHT = 128;
@@ -36,6 +39,8 @@ public class AtributeDialComponent extends Gui implements IGUIComponent
 	private int m_backgroundTopModifier;
 	private int m_backgroundWidthModifier;
 	private float m_backgroundTickCounter;
+	private IGUIComponent m_parent;
+	private GUIComponentScreen m_root;
 	
 	@Override
 	public void init(int parentLeft, int parentTop) 
@@ -48,16 +53,21 @@ public class AtributeDialComponent extends Gui implements IGUIComponent
 	@Override
 	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds) 
 	{
+		if(!m_isVisable)
+		{
+			return;
+		}
 		UpdateTicks(deltaSeconds);
 		mc.getTextureManager().bindTexture(DIAL_RESOURCE);
-		drawTexturedModalRect(m_top + (mc.currentScreen.width - BACKGROUND_WIDTH) / 2, 
-				m_left + (mc.currentScreen.width - BACKGROUND_HEIGHT) / 2, 
+        GL11.glEnable(GL11.GL_BLEND);
+		drawTexturedModalRect(m_top + (m_root.width - BACKGROUND_WIDTH) / 2, 
+				m_left + (m_root.height - BACKGROUND_HEIGHT) / 2, 
 				128 + (m_backgroundWidthModifier * BACKGROUND_WIDTH), 
 				128 + (m_backgroundTopModifier * BACKGROUND_HEIGHT), 
 				BACKGROUND_WIDTH, 
 				BACKGROUND_HEIGHT);
-		drawTexturedModalRect((mc.displayWidth + WIDTH) / 2, 
-				(mc.displayHeight + HEIGHT) / 2, 
+		drawTexturedModalRect(m_top + (m_root.width - WIDTH) / 2, 
+				m_left + (m_root.height - HEIGHT) / 2, 
 				0, 
 				0, 
 				WIDTH, 
@@ -142,5 +152,29 @@ public class AtributeDialComponent extends Gui implements IGUIComponent
 			m_backgroundTopModifier = 0;
 			m_backgroundTopModifier++;
 		}
+	}
+
+	@Override
+	public void registerParent(IGUIComponent parent) 
+	{
+		m_parent = parent;
+	}
+
+	@Override
+	public IGUIComponent getParent() 
+	{
+		return m_parent;
+	}
+
+	@Override
+	public void registerRoot(GUIComponentScreen root) 
+	{
+		m_root = root;
+	}
+
+	@Override
+	public GUIComponentScreen getRoot() 
+	{
+		return m_root;
 	}
 }

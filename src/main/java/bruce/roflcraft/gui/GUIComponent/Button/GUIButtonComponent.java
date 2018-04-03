@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.lwjgl.input.Mouse;
 
+import bruce.roflcraft.gui.GUIComponent.GUIComponentScreen;
 import bruce.roflcraft.gui.GUIComponent.IGUIComponent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -22,6 +23,8 @@ public abstract class GUIButtonComponent extends Gui implements IGUIComponent
 	private int m_top;
 	private int m_parentTop;
 	private boolean m_visability = true;
+	private IGUIComponent m_parent;
+	private GUIComponentScreen m_root;
 	
 	/**
 	 * was the mouse over the button last tick
@@ -137,6 +140,30 @@ public abstract class GUIButtonComponent extends Gui implements IGUIComponent
 		m_visability = visability;
 	}
 
+	@Override
+	public void registerParent(IGUIComponent parent) 
+	{
+		m_parent = parent;
+	}
+
+	@Override
+	public void registerRoot(GUIComponentScreen root) 
+	{
+		m_root = root;
+	}
+
+	@Override
+	public IGUIComponent getParent() 
+	{
+		return m_parent;
+	}
+
+	@Override
+	public GUIComponentScreen getRoot() 
+	{
+		return m_root;
+	}
+	
 	/**
 	 * Registers a Button component listener
 	 * @param listener The listener being registered
