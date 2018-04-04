@@ -1,5 +1,8 @@
 package bruce.roflcraft.client.gui.component.character;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import bruce.roflcraft.client.gui.component.GUIComponentScreen;
@@ -12,6 +15,7 @@ import bruce.roflcraft.rpg.character.stats.AttributeIndex;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.config.GuiEditArrayEntries.IArrayEntry;
 
 /**
  * This class provides the GUI for an attribute
@@ -19,7 +23,7 @@ import net.minecraft.util.ResourceLocation;
  * @author Lorrtath
  *
  */
-public class AttributeFrame extends Gui implements IGUIComponent
+public class AttributeFrame extends Gui implements IGUIComponent, IAttributeBasedComponent
 {
 	private static final String FRAME_TEXTURE_NAME = "attribute_frame.png";
 	private static final ResourceLocation FRAME_RESOURCE = new ResourceLocation(Reference.MODID , "textures/gui/" + FRAME_TEXTURE_NAME);
@@ -49,6 +53,8 @@ public class AttributeFrame extends Gui implements IGUIComponent
 	private float m_backgroundTickCounter;
 	private IGUIComponent m_parent;
 	private GUIComponentScreen m_root;
+	private List<IAttributeControlledComponent> m_attributeDependancies;
+	private float m_angle;
 	
 	public AttributeFrame(AttributeIndex attribute)
 	{
@@ -60,23 +66,20 @@ public class AttributeFrame extends Gui implements IGUIComponent
 		m_top = 0;
 		m_backgroundIndex = 0;
 		m_backgroundTickCounter = 0;
+		m_attributeDependancies = new ArrayList<IAttributeControlledComponent>();
 		switch(attribute)
 		{
 		case AT_BODY:
-			m_leftOffset = 32;
-			m_topOffset = -32;
+			m_angle = 0;
 			break;
 		case AT_MIND:
-			m_leftOffset = 88;
-			m_topOffset = 64;
+			m_angle = 120;
 			break;
 		case AT_SOUL:
-			m_leftOffset = -24;
-			m_topOffset = 64;
+			m_angle = 240;
 			break;
 		default:
 			break;
-		
 		}
 	}
 	
@@ -90,31 +93,35 @@ public class AttributeFrame extends Gui implements IGUIComponent
 	@Override
 	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds) 
 	{
-		if(m_isVisable)
+		if(!m_isVisable)
 		{
-			updateTickIndexes(deltaSeconds);
-	        GL11.glEnable(GL11.GL_BLEND);
-			mc.getTextureManager().bindTexture(FRAME_RESOURCE);
-			// Draw background
-			drawTexturedModalRect(
-					0, //((m_root.width - FRAME_BACK_WIDTH)/2) + getActualLeft() + FRAME_BACK_MARGIN, 
-					0,  //((m_root.height + FRAME_BACK_HEIGHT)/2) + getActualTop() + FRAME_BACK_MARGIN, 
-					FRAME_BACK_LEFT + m_backgroundIndex * FRAME_BACK_WIDTH, 
-					FRAME_BACK_TOP + m_attribute.ordinal() * FRAME_HEIGHT, 
-					FRAME_BACK_WIDTH, 
-					FRAME_BACK_HEIGHT);
-			// Draw foreground
-			drawTexturedModalRect(
-					((m_root.width - FRAME_WIDTH)/2), 
-					(m_root.height/2) + 64, 
-					0, 
-					0 + m_attribute.ordinal() * FRAME_HEIGHT, 
-					FRAME_WIDTH, 
-					FRAME_HEIGHT);
-
-	        mc.getTextureManager().bindTexture(new ResourceLocation(Reference.MODID , "textures/gui/character_sheet_details.png"));
-	        drawTexturedModalRect(((m_root.width - FRAME_WIDTH)/2) + 16, (m_root.height/2) + 80, 0, 0, 32, 32 );
+			return;
 		}
+		updateTickIndexes(deltaSeconds);
+        GL11.glEnable(GL11.GL_BLEND);
+		GL11.glPushMatrix();
+		GL11.glTranslatef(getActualLeft(), getActualTop(), 0);
+		GL11.glRotated(m_angle, 0, 0, 1);
+		mc.getTextureManager().bindTexture(FRAME_RESOURCE);
+		// Draw background
+		drawTexturedModalRect(
+				FRAME_BACK_WIDTH / -2,
+				FRAME_BACK_HEIGHT / -2,
+				FRAME_BACK_LEFT, 
+				FRAME_BACK_TOP, 
+				FRAME_BACK_WIDTH, 
+				FRAME_BACK_HEIGHT);
+		// Draw foreground
+		drawTexturedModalRect(
+				FRAME_WIDTH / -2, 
+				FRAME_HEIGHT / -2, 
+				0, 
+				0, 
+				FRAME_WIDTH, 
+				FRAME_HEIGHT);
+        mc.getTextureManager().bindTexture(new ResourceLocation(Reference.MODID , "textures/gui/character_sheet_details.png"));
+        drawTexturedModalRect( (FRAME_WIDTH /- 2) + 16, (FRAME_HEIGHT / -2) + 16, 0, 0, 32, 32 );
+        GL11.glPopMatrix();
 	}
 	
 	@Override
@@ -216,5 +223,38 @@ public class AttributeFrame extends Gui implements IGUIComponent
 	public GUIComponentScreen getRoot() 
 	{
 		return m_root;
+	}
+
+	@Override
+	public void registerListener(IAttributeControlledComponent listener) 
+	{
+		m_attributeDependancies.add(listener);
+	}
+
+	@Override
+	public void unregisterListener(IAttributeControlledComponent listener) 
+	{
+		m_attributeDependancies.remove(listener);
+	}
+
+	@Override
+	public void setAttribute(AttributeIndex index) 
+	{
+		m_attribute = index;
+	}
+
+	@Override
+	public AttributeIndex getAttribute() 
+	{
+		return m_attribute;
+	}
+
+	@Override
+	public void broadcastAttribute() 
+	{
+		for(int i = 0; i < m_attributeDependancies.size(); i++)
+		{
+			m_attributeDependancies.get(i).changeAttribute(m_attribute, this);
+		}
 	}
 }

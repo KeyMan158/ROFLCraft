@@ -21,7 +21,22 @@ public class CharacterSheetScreen extends GUIComponentScreen
 		AtributeDialComponent dial = new AtributeDialComponent();
 		panables.register(dial);
 		
-		AttributeFrame test = new AttributeFrame(AttributeIndex.AT_BODY);
-		panables.register(test);
+		AttributeFrame bdy = new AttributeFrame(AttributeIndex.AT_MIND);
+		bdy.setTop(128);
+		bdy.setLeft(128);
+		bdy.registerListener(dial);
+		panables.register(bdy);
+		
+		/*AttributeFrame mnd = new AttributeFrame(AttributeIndex.AT_MIND);
+		mnd.setTop(0);
+		mnd.setLeft(128);
+		mnd.registerListener(dial);
+		panables.register(mnd);
+		
+		AttributeFrame sul = new AttributeFrame(AttributeIndex.AT_SOUL);
+		sul.setTop(0);
+		sul.setLeft(2 * 128);
+		sul.registerListener(dial);
+		panables.register(sul);*/
 	}
 }
