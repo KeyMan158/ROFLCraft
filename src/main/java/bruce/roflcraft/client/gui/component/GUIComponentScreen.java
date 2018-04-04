@@ -1,4 +1,4 @@
-package bruce.roflcraft.gui.GUIComponent;
+package bruce.roflcraft.client.gui.component;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package bruce.roflcraft.gui.GUIComponent.Button;
+package bruce.roflcraft.client.gui.component.button;
 
 import bruce.roflcraft.main.Reference;
 import net.minecraft.client.Minecraft;

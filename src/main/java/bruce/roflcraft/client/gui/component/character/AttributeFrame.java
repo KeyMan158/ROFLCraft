@@ -1,9 +1,9 @@
-package bruce.roflcraft.gui.GUIComponent.CharacterSheet;
+package bruce.roflcraft.client.gui.component.character;
 
 import org.lwjgl.opengl.GL11;
 
-import bruce.roflcraft.gui.GUIComponent.GUIComponentScreen;
-import bruce.roflcraft.gui.GUIComponent.IGUIComponent;
+import bruce.roflcraft.client.gui.component.GUIComponentScreen;
+import bruce.roflcraft.client.gui.component.IGUIComponent;
 import bruce.roflcraft.main.Reference;
 import bruce.roflcraft.rpg.character.RPGCharacterData;
 import bruce.roflcraft.rpg.character.RPGCharacterProvider;

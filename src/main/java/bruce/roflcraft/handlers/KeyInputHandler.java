@@ -2,7 +2,6 @@ package bruce.roflcraft.handlers;
 
 import org.lwjgl.input.Mouse;
 
-import bruce.roflcraft.gui.RoflGUIScreen;
 import bruce.roflcraft.init.KeyBindings;
 import bruce.roflcraft.main.RoflCraft;
 import bruce.roflcraft.rpg.character.IRPGCharacterData;

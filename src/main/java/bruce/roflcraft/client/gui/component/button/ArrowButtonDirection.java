@@ -1,4 +1,4 @@
-package bruce.roflcraft.gui.GUIComponent.Button;
+package bruce.roflcraft.client.gui.component.button;
 
 /**
  * Enum for the direction of an arrow button 

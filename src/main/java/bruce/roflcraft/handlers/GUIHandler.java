@@ -1,8 +1,6 @@
 package bruce.roflcraft.handlers;
 
-import bruce.roflcraft.gui.CharacterSheetGUI;
-import bruce.roflcraft.gui.GUIComponent.CharacterSheet.CharacterSheetScreen;
-import bruce.roflcraft.gui.character.DEBUG_CharacterSheet;
+import bruce.roflcraft.client.gui.screen.CharacterSheetScreen;
 import bruce.roflcraft.settings.GUIIDs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

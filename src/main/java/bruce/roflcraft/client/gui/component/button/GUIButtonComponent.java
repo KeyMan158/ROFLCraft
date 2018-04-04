@@ -1,12 +1,12 @@
-package bruce.roflcraft.gui.GUIComponent.Button;
+package bruce.roflcraft.client.gui.component.button;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Mouse;
 
-import bruce.roflcraft.gui.GUIComponent.GUIComponentScreen;
-import bruce.roflcraft.gui.GUIComponent.IGUIComponent;
+import bruce.roflcraft.client.gui.component.GUIComponentScreen;
+import bruce.roflcraft.client.gui.component.IGUIComponent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 

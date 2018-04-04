@@ -3,7 +3,6 @@ package bruce.roflcraft.init;
 import org.lwjgl.input.Keyboard;
 
 import akka.dispatch.SystemMessageQueue;
-import bruce.roflcraft.gui.RoflGUIScreen;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
