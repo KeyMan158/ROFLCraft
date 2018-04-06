@@ -80,11 +80,11 @@ public class GUITextureLayer
 		default:
 			return 0;
 		case Top:
-			return 0 + PivotX;
+			return 0 + PivotY;
 		case Middle:
-			return (Height / -2) + PivotX;
+			return (Height / -2) + PivotY;
 		case Bottom:
-			return (Height * -1) + PivotX;
+			return (Height * -1) + PivotY;
 		}
 	}
 	
@@ -97,11 +97,11 @@ public class GUITextureLayer
 		switch (HAlignment)
 		{
 		case Center:
-			return (Width / -2) + PivotY;
+			return (Width / -2) + PivotX;
 		case Left:
-			return 0 + PivotY;
+			return 0 + PivotX;
 		case Right:
-			return (Width * -1) + PivotY;
+			return (Width * -1) + PivotX;
 		default:
 			return 0;
 		}

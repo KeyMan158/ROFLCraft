@@ -45,7 +45,7 @@ public class AtributeDialComponent extends Gui implements IGUIComponent, IAttrib
 	private float m_angle;
 	private float m_targetAngle;
 	private boolean m_isRotating;
-	private static final float m_rotationSpeed = 120;
+	private static final float m_rotationSpeed = 60;
 	
 	@Override
 	public void init(int parentLeft, int parentTop) 

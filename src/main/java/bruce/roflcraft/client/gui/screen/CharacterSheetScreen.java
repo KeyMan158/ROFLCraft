@@ -22,42 +22,28 @@ public class CharacterSheetScreen extends GUIComponentScreen
 	public CharacterSheetScreen()
 	{
 		super();
-		
-		// Testing:
-		
+				
 		GUIComponentManager panables = new GUIComponentManager();
 		registerComponent(panables);
-		//AtributeDialComponent dial = new AtributeDialComponent();
-		//panables.register(dial);
-		/*
-		AttributeFrame bdy = new AttributeFrame(AttributeIndex.AT_MIND);
-		bdy.setTop(128);
-		bdy.setLeft(128);
-		bdy.registerListener(dial);
-		panables.register(bdy);*/
+		AtributeDialComponent dial = new AtributeDialComponent();
+		panables.register(dial);
 		
-		GUIComponentBase test = new GUIComponentBase();
-		GUITextureLayer rsc = new GUITextureLayer();
-		rsc.TextureResource = new ResourceLocation(Reference.MODID , "textures/gui/attribute_frame.png");
-		rsc.VAlignment = VerticalAlignment.Middle;
-		rsc.HAlignment = HorizontalAlignment.Center;
-		rsc.Width = 64;
-		rsc.Height = 64;
-		test.setRotation(45);
-		test.AddResource(rsc);
-		test.setUseCenter(true);
-		panables.register(test);
+		AttributeFrame bodyFrame = new AttributeFrame(AttributeIndex.AT_BODY);
+		bodyFrame.setTop(64);
+		bodyFrame.setLeft(0);
+		bodyFrame.registerListener(dial);
+		panables.register(bodyFrame);
 		
-		/*AttributeFrame mnd = new AttributeFrame(AttributeIndex.AT_MIND);
-		mnd.setTop(0);
-		mnd.setLeft(128);
-		mnd.registerListener(dial);
-		panables.register(mnd);
+		AttributeFrame mindFrame = new AttributeFrame(AttributeIndex.AT_SOUL);
+		mindFrame.setTop(-32);
+		mindFrame.setLeft(55);
+		mindFrame.registerListener(dial);
+		panables.register(mindFrame);
 		
-		AttributeFrame sul = new AttributeFrame(AttributeIndex.AT_SOUL);
-		sul.setTop(0);
-		sul.setLeft(2 * 128);
-		sul.registerListener(dial);
-		panables.register(sul);*/
+		AttributeFrame soulFrame = new AttributeFrame(AttributeIndex.AT_MIND);
+		soulFrame.setTop(-32);
+		soulFrame.setLeft(-55);
+		soulFrame.registerListener(dial);
+		panables.register(soulFrame);
 	}
 }
