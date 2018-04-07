@@ -10,6 +10,8 @@ import bruce.roflcraft.client.gui.component.GUIComponentScreen;
 import bruce.roflcraft.client.gui.component.IGUIComponent;
 import bruce.roflcraft.client.gui.component.utl.GUITextureLayer;
 import bruce.roflcraft.client.gui.component.utl.HorizontalAlignment;
+import bruce.roflcraft.client.gui.component.utl.MouseCollisionDetectorCircle;
+import bruce.roflcraft.client.gui.component.utl.MouseCollisionMode;
 import bruce.roflcraft.client.gui.component.utl.VerticalAlignment;
 import bruce.roflcraft.main.Reference;
 import bruce.roflcraft.rpg.character.RPGCharacterData;
@@ -38,6 +40,7 @@ public class AttributeFrame extends GUIComponentBase implements IAttributeBasedC
 	private static final int XP_WIDTH = 32;
 	private static final int XP_HEIGHT = 32;
 	private static final float ROTATION_INTERVAL = 120f;
+	private static final float HIT_RADIUS = 18;
 	
 	private AttributeIndex m_attribute;
 	private AttributeCollection m_attributes;
@@ -64,6 +67,10 @@ public class AttributeFrame extends GUIComponentBase implements IAttributeBasedC
 		m_attributeDependancies = new ArrayList<IAttributeControlledComponent>();
 		setRotation(ROTATION_INTERVAL * attribute.ordinal()); 
 		setUseCenter(true);
+		setCollisionMode(MouseCollisionMode.MOUSE_COLLISION_CIRCLE);
+		MouseCollisionDetectorCircle detector = (MouseCollisionDetectorCircle)getCollisionDetector();
+		detector.setHitRadius(XP_WIDTH/2);
+		setUseToolTip(true);
 		
 		RPGCharacterData characterData = (RPGCharacterData)Minecraft.getMinecraft().player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
 		m_attributes = characterData.getAttributes();
@@ -93,14 +100,30 @@ public class AttributeFrame extends GUIComponentBase implements IAttributeBasedC
 	}
 	
 	@Override
+	protected void handle_MouseEnter()
+	{
+		broadcastAttribute();
+	}
+	
+	@Override
 	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds) 
 	{
-		m_xpBarLayer.Width = m_attributes.getAttributeProgress(m_attribute) * XP_WIDTH / 3; 
+		m_xpBarLayer.Width = m_attributes.getAttributeProgress(m_attribute) * XP_WIDTH / 3;
+		List<String> textLines = new ArrayList<String>();
+		textLines.add(m_attributes.getStatName(m_attribute.ordinal()));
+		textLines.add("Level: " + m_attributes.getStatValue(m_attribute.ordinal()));
+		textLines.add("Progress: " + m_attributes.getAttributeProgress(m_attribute) + "/3");
+		setToolTipText(textLines);
 		super.drawComponent(mc, mouseX, mouseY, deltaSeconds);
-		if(checkMouseCollision(mouseX, mouseY))
+		/*if(checkMouseCollision(mouseX, mouseY))
 		{
 			broadcastAttribute();
-		}
+			List<String> textLines = new ArrayList<String>();
+			textLines.add(m_attributes.getStatName(m_attribute.ordinal()));
+			textLines.add("Level: " + m_attributes.getStatValue(m_attribute.ordinal()));
+			textLines.add("Progress: " + m_attributes.getAttributeProgress(m_attribute) + "/3");
+			getRoot().drawHoveringText(textLines, mouseX + 8, mouseY);
+		}*/
 	}
 	
 	@Override
@@ -136,13 +159,13 @@ public class AttributeFrame extends GUIComponentBase implements IAttributeBasedC
 		}
 	}
 	
-	private boolean checkMouseCollision(int mouseX, int mouseY)
+	/*private boolean checkMouseCollision(int mouseX, int mouseY)
 	{
 		double distance = Math.sqrt(0.5 * (Math.pow(mouseX - getActualLeft(), 2) + Math.pow(mouseY - getActualTop(), 2)));
-		if(FRAME_HEIGHT / 2 < distance)
+		if(HIT_RADIUS < distance)
 		{
 			return false;
 		}
 		return true;
-	}
+	}*/
 }
