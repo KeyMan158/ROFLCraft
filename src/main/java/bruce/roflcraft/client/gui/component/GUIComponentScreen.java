@@ -18,6 +18,8 @@ public class GUIComponentScreen extends GuiScreen implements IGUIComponent
 {
 	private List<IGUIComponent> m_components;
 	private boolean m_visability;
+	private List<String> m_toolTipText;
+	private boolean m_drawToolTip;
 	
 	public GUIComponentScreen()
 	{
@@ -26,10 +28,27 @@ public class GUIComponentScreen extends GuiScreen implements IGUIComponent
 		m_visability = true;
 	}
 	
+	/**
+	 * Tells the GUI screen to draw a tool tip. Call this method 
+	 * and not drawHoveringText from a component to ensure that
+	 * the tool tip is at the front of the screen
+	 * @param toolTipText
+	 */
+	public void setToolTip(List<String> toolTipText)
+	{
+		m_toolTipText = toolTipText;
+		m_drawToolTip = true;
+	}
+	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks)
 	{
 		drawComponent(mc, mouseX, mouseY, partialTicks);
+		if (m_drawToolTip)
+		{
+			drawHoveringText(m_toolTipText, mouseX + 8, mouseY);
+			m_drawToolTip = false;
+		}
 	}
 	
 	@Override

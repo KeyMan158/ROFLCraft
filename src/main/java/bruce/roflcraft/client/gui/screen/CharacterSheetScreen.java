@@ -3,6 +3,7 @@ package bruce.roflcraft.client.gui.screen;
 import bruce.roflcraft.client.gui.component.GUIComponentBase;
 import bruce.roflcraft.client.gui.component.GUIComponentManager;
 import bruce.roflcraft.client.gui.component.GUIComponentScreen;
+import bruce.roflcraft.client.gui.component.button.BuySkillPointButton;
 import bruce.roflcraft.client.gui.component.character.AtributeDialComponent;
 import bruce.roflcraft.client.gui.component.character.AttributeFrame;
 import bruce.roflcraft.client.gui.component.utl.GUITextureLayer;
@@ -25,8 +26,12 @@ public class CharacterSheetScreen extends GUIComponentScreen
 				
 		GUIComponentManager panables = new GUIComponentManager();
 		registerComponent(panables);
+		
 		AtributeDialComponent dial = new AtributeDialComponent();
 		panables.register(dial);
+		
+		BuySkillPointButton skillPointButton = new BuySkillPointButton();
+		panables.register(skillPointButton);
 		
 		AttributeFrame bodyFrame = new AttributeFrame(AttributeIndex.AT_BODY);
 		bodyFrame.setTop(64);

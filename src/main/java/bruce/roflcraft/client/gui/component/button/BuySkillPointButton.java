@@ -1,5 +1,12 @@
 package bruce.roflcraft.client.gui.component.button;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import bruce.roflcraft.client.gui.component.utl.GUITextureLayer;
+import bruce.roflcraft.client.gui.component.utl.HorizontalAlignment;
+import bruce.roflcraft.client.gui.component.utl.MouseCollisionMode;
+import bruce.roflcraft.client.gui.component.utl.VerticalAlignment;
 import bruce.roflcraft.main.Reference;
 import bruce.roflcraft.rpg.character.RPGCharacterData;
 import bruce.roflcraft.rpg.character.RPGCharacterProvider;
@@ -8,17 +15,35 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 /**
- * Button for buying skill points
+ * Specific extension of the GUI button component for 
+ * purchasing a skill point.
  * @author Lorrtath
  *
  */
 public class BuySkillPointButton  extends GUIButtonComponent
 {
-	private static final int HEIGHT = 15;
-	private static final int WIDTH = 15;
+	private static final int HEIGHT = 32;
+	private static final int WIDTH = 32;
+	private static final int LEFT = 0;
 	// TODO Replace this placeholder with the correct asset & animations etc..
-	private static final String BUTTON_TEXTURE_NAME = "PlusButton.png";
+	private static final String BUTTON_TEXTURE_NAME = "character_sheet_details.png";
 	private static final ResourceLocation BUTTON_RESOURCE = new ResourceLocation(Reference.MODID + ":textures/gui/" + BUTTON_TEXTURE_NAME);
+	private RPGCharacterData m_characterData;
+	
+	public BuySkillPointButton()
+	{
+		super();
+		GUITextureLayer texture = new GUITextureLayer();
+		texture.TextureResource =  new ResourceLocation(Reference.MODID + ":textures/gui/" + BUTTON_TEXTURE_NAME);
+		texture.HAlignment = HorizontalAlignment.Center;
+		texture.VAlignment = VerticalAlignment.Middle;
+		texture.U = WIDTH;
+		AddResource(texture);
+		m_characterData = (RPGCharacterData)Minecraft.getMinecraft().player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
+		setUseCenter(true);
+		setUseToolTip(true);
+		setCollisionMode(MouseCollisionMode.MOUSE_COLLISION_CIRCLE);
+	}
 	
 	@Override
 	protected void onButtonPressed(int mouseX, int mouseY)
@@ -27,29 +52,19 @@ public class BuySkillPointButton  extends GUIButtonComponent
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		if(player.experienceLevel > 0)
 		{
-			RPGCharacterData charaterData = (RPGCharacterData)player.getCapability(RPGCharacterProvider.CHAR_CAP, null);
-			// TODO Implement this in ROFLCraft User Settings object
-			charaterData.PurchaseSkillPoint(1);
+			m_characterData.PurchaseSkillPoint(1);
 		}
 	}
 	
 	@Override
 	public void drawComponent(Minecraft mc, int mouseX, int mouseY, float deltaSeconds)
 	{
+		List<String> text = new ArrayList<String>();
+		EntityPlayer player = Minecraft.getMinecraft().player;
+		text.add("Level: " + m_characterData.getSkillPointTracker().getLevel());
+		text.add("Points Available: " + m_characterData.getSkillPointTracker().getAvailablePoints());
+		text.add("XP: " +  m_characterData.getSkillPointTracker().getStoredXP() + " / " + m_characterData.getSkillPointTracker().xpToNext());
+		setToolTipText(text);
 		super.drawComponent(mc, mouseX, mouseY, deltaSeconds);
-		mc.getTextureManager().bindTexture(BUTTON_RESOURCE);
-		drawTexturedModalRect(getActualLeft(), getActualTop(), 1, 1, WIDTH, HEIGHT);
-	}
-	
-	@Override
-	public int getWidth() 
-	{
-		return HEIGHT;
-	}
-
-	@Override
-	public int getHeight() 
-	{
-		return WIDTH;
 	}
 }

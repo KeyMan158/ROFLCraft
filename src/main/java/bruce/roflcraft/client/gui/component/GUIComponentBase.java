@@ -222,7 +222,7 @@ public class GUIComponentBase extends Gui implements IGUIComponent
 		m_mouseIsOver = result;
 		if(m_mouseIsOver && m_useToolTip)
 		{
-			m_root.getRoot().drawHoveringText(m_toolTipText, mouseX + 8, mouseY);
+			m_root.getRoot().setToolTip(m_toolTipText);
 		}
 	}
 	
