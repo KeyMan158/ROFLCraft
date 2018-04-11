@@ -1,6 +1,5 @@
 package bruce.roflcraft.init;
 
-import bruce.roflcraft.blocks.TestBlock;
 import bruce.roflcraft.main.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -10,19 +9,13 @@ import net.minecraft.item.Item;
 
 public class ROFLCraftBlocks 
 {
-	//this is an example test block
-	public static TestBlock test_block;
 	
 	public static void init()
 	{
-		test_block = new TestBlock();
-		test_block.setUnlocalizedName("test_block");
-		test_block.setCreativeTab(CreativeTabs.TOOLS);
 	}
 	
 	public static void registerRenders()
 	{
-		registerRender(test_block);
 	}
 	
 	public static void registerRender(Block block)
