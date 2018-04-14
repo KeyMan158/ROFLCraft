@@ -63,14 +63,14 @@ public class ArrowButton extends GUIButtonComponent
 			{
 				m_pulseIndex = 0;
 			}
-			if(getIsMouseOverButton() && m_imageIndex < MAX_IMAGE_INDEX)
+			/*if(getIsMouseOverButton() && m_imageIndex < MAX_IMAGE_INDEX)
 			{
 				m_imageIndex++;
 			}
 			else if(m_imageIndex > 0 && getIsMouseOverButton() == false)
 			{
 				m_imageIndex--;
-			}
+			}*/
 		}
 	}
 	

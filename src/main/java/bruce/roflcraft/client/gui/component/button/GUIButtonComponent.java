@@ -103,12 +103,12 @@ public abstract class GUIButtonComponent extends GUIComponentBase
 	private void processesMouseDown(int mouseX, int mouseY)
 	{
 		boolean mouseIsDown = Mouse.isButtonDown(0);
-		if(mouseIsDown && !m_isMouseDown)
+		if(mouseIsDown && !m_isMouseDown && getMouseIsOver())
 		{
 			m_isMouseDown = mouseIsDown;
 			onButtonPressed(mouseX, mouseY);
 		}
-		else if (!mouseIsDown && m_isMouseDown)
+		else if (!mouseIsDown && m_isMouseDown && getMouseIsOver())
 		{
 			m_isMouseDown = mouseIsDown;
 			onButtonReleased(mouseX, mouseY);

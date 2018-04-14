@@ -31,7 +31,7 @@ import net.minecraftforge.fml.client.config.GuiEditArrayEntries.IArrayEntry;
  */
 public class AttributeFrame extends GUIComponentBase implements IAttributeBasedComponent
 {
-	private static final String FRAME_TEXTURE_NAME = "attribute_frame.png";
+	private static final String FRAME_TEXTURE_NAME = "character_grid.png";
 	private static final String XP_TEXTURE_NAME = "character_sheet_details.png";
 	private static final String GUI_TEXTURE_FOLDER = "textures/gui/";
 
