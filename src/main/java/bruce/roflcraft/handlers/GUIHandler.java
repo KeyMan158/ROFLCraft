@@ -1,7 +1,6 @@
 package bruce.roflcraft.handlers;
 
-import bruce.roflcraft.gui.CharacterSheetGUI;
-import bruce.roflcraft.gui.character.DEBUG_CharacterSheet;
+import bruce.roflcraft.client.gui.screen.CharacterSheetScreen;
 import bruce.roflcraft.settings.GUIIDs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -15,7 +14,7 @@ public class GUIHandler implements IGuiHandler
 		if (ID == GUIIDs.CharacterSheet.ordinal())
 		{
 			//return new CharacterSheetGUI();
-			return new DEBUG_CharacterSheet();
+			return new CharacterSheetScreen();
 		}
 		return null;
 	}
@@ -25,7 +24,7 @@ public class GUIHandler implements IGuiHandler
 		if (ID == GUIIDs.CharacterSheet.ordinal())
 		{
 			//return new CharacterSheetGUI();
-			return new DEBUG_CharacterSheet();
+			return new CharacterSheetScreen();
 		}
 		return null;
 	}
