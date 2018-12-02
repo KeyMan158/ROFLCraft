@@ -1,7 +1,13 @@
 package bruce.roflcraft.rpg.currency;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import bruce.roflcraft.rpg.currency.listeners.ICurrencyHolderListener;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
 /**
- * Implementation of the ICurrencyHolder interface
+ * The default implementation of the ICurrencyHolder interface
  * @author Lorrtath
  *
  */
@@ -10,7 +16,10 @@ public class RPGCurrencyHolder implements ICurrencyHolder
 	// The amount that can be stored in this container
 	private int storedAmount;
 	
-	// THe max amount that can be stored, -1 = unlimited
+	// Listeners for changes to this object
+	private List<ICurrencyHolderListener> listeners;
+	
+	// The max amount that can be stored, -1 = unlimited
 	private int maxAmount;
 	
 	private static final int DEFAULT_MAX_CURRENCT = 30;
@@ -19,6 +28,7 @@ public class RPGCurrencyHolder implements ICurrencyHolder
 	{
 		storedAmount = 0;
 		maxAmount = DEFAULT_MAX_CURRENCT;
+		listeners = new ArrayList<ICurrencyHolderListener>();
 	}
 	
 	/**
@@ -29,6 +39,18 @@ public class RPGCurrencyHolder implements ICurrencyHolder
 	public void SetMaxAmount(int amount)
 	{
 		maxAmount = amount;
+	}
+	
+	/**
+	 * Tells all listeners that there has been a change to this holder
+	 * @param amount The amount to broadcast in the change
+	 */
+	private void broadcastChange(int amount)
+	{
+		for (ICurrencyHolderListener listener : listeners) 
+		{
+			listener.currencyBalanceChanged(amount);
+		}
 	}
 	
 	@Override
@@ -76,5 +98,22 @@ public class RPGCurrencyHolder implements ICurrencyHolder
 		storedAmount = 0;
 		return amountRemoved;
 	}
-
+	
+	@Override
+	public void update(RPGCurencyStatement statement)
+	{
+		storedAmount = statement.balance;
+	}
+	
+	@Override
+	public void addCurrencyHolderListener(ICurrencyHolderListener listener)
+	{
+		listeners.add(listener);
+	}
+	
+	@Override
+	public void removeCurrencyHolderListener(ICurrencyHolderListener listener)
+	{
+		listeners.remove(listener);
+	}
 }

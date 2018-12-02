@@ -1,5 +1,7 @@
 package bruce.roflcraft.rpg.currency;
 
+import bruce.roflcraft.rpg.currency.listeners.ICurrencyHolderListener;
+
 /**
  * Base interface for all RPG currency containers and is
  * the subject for all currency actions (i.e. transactions)
@@ -39,4 +41,22 @@ public interface ICurrencyHolder
 	 * @return The amount removed from the container
 	 */
 	public int removeAll();
+	
+	/**
+	 * Instructs the holder to update its values based on the input statement
+	 * @param statement The statement containing currency balance modifications
+	 */
+	public void update(RPGCurencyStatement statement);
+	
+	/**
+	 * Adds a listener for changes to the currency holder
+	 * @param listener The listener to add
+	 */
+	public void addCurrencyHolderListener(ICurrencyHolderListener listener);
+	
+	/**
+	 * Removes a listener for changes to the currency holder
+	 * @param listener The listener to remove
+	 */
+	public void removeCurrencyHolderListener(ICurrencyHolderListener listener);
 }
